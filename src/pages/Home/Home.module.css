@@ -1,0 +1,41 @@
+.container {
+    max-width: 800px; /* Обмежуємо ширину контейнера */
+    margin: 0 auto; /* Центруємо по горизонталі */
+    padding: 20px;
+    background-color: #1b1b1b
+; /* Світлий фон для контенту */
+   
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Легка тінь */
+  }
+  
+  .content {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .about {
+    font-size: 16px;
+    line-height: 1.6; /* Покращує читабельність */
+    text-align: justify; /* Вирівнюємо текст по ширині */
+    color: #FFFFFF; /* Темно-сірий колір */
+  }
+  
+  a {
+    display: inline-block;
+    margin-top: 10px;
+ 
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  a:hover {
+    
+  }
+
+  .contentText{
+    display: flex;
+    justify-content: center;
+  }
+  

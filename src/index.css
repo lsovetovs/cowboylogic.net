@@ -1,0 +1,27 @@
+:root {
+  font-family: "Droid Sans", sans-serif;
+
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #ddddd;
+  background-color: #242424;
+}
+
+body {
+  background-image: url(../src/assets/images/body_bg_cowboy.jpg);
+  background-repeat: round;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+a,
+Link,
+NavLink {
+  text-decoration: none;
+  color: inherit;
+}
+
