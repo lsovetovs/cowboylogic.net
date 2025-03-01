@@ -1,0 +1,67 @@
+.container {
+    max-width: 800px; /* Обмежуємо ширину контейнера */
+    margin: 0 auto; /* Центруємо по горизонталі */
+    padding: 20px;
+    background-color: #1b1b1b; 
+  }
+.contact {
+    flex: 1;
+    padding: 44px;
+    background-color: var(--white);
+    border-radius: 10px;
+    border: 1px solid var(--light-gray);
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .contact h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--dark-blue);
+  }
+  
+  .contact p {
+    font-size: 14px;
+    color: #000000;
+    margin-bottom: 24px;
+  }
+  
+  .contact input,
+  .contact textarea {
+    width: 100%;
+    padding: 18px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    font-size: 16px;
+    color: #000000;
+    box-sizing: border-box;
+    border: none;
+    margin-bottom: 14px;
+  }
+  
+  .contact input[type="date"] {
+    padding: 18px;
+  }
+  
+  .contact button {
+    padding: 16px 60px;
+    background-color: #FFFFFF;
+    color: #000000;
+    border: none;
+    border-radius: 200px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .contact button:hover {
+    background-color: #F2F2F2;
+  }
