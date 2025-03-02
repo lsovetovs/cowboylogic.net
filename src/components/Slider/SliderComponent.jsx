@@ -3,6 +3,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./SliderComponent.module.css";
 
+import img1 from "../../assets/images/img-1.jpg";
+import img2 from "../../assets/images/img-2.jpg";
+
 // Функція для кастомних стрілок
 const Arrow = ({ className, style, onClick, direction }) => (
   <div
@@ -16,8 +19,8 @@ const Arrow = ({ className, style, onClick, direction }) => (
 
 const SliderComponent = () => {
   const slides = [
-    { id: 1, image: "src/assets/images/img-1.jpg", text: "Explore New Books" },
-    { id: 2, image: "src/assets/images/img-2.jpg", text: "Find Your Next Adventure" },
+    { id: 1, image: img1, text: "Explore New Books" },
+    { id: 2, image: img2, text: "Find Your Next Adventure" },
   ];
 
   const settings = {
