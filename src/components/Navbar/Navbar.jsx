@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 // import { ReactComponent as SearchIcon } from "../../assets/svg/search-icon.svg";
-import searchIcon from "../../assets/svg/search-icon.svg";
+import searchIcon from "/assets/svg/search-icon.svg";
 import { useState } from "react";
 import styles from "./Navbar.module.css";
 import clsx from "clsx";

@@ -10,7 +10,7 @@
 }
 
 body {
-  background-image: url(../src/assets/images/body_bg_cowboy.jpg);
+  background-image: url(/assets/images/body_bg_cowboy.jpg);
   background-repeat: round;
   display: flex;
   justify-content: center;

@@ -3,8 +3,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./SliderComponent.module.css";
 
-import img1 from "../../assets/images/img-1.jpg";
-import img2 from "../../assets/images/img-2.jpg";
+import img1 from "/assets/images/img-1.jpg";
+import img2 from "/assets/images/img-2.jpg";
 
 // Функція для кастомних стрілок
 const Arrow = ({ className, style, onClick, direction }) => (

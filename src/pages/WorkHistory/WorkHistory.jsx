@@ -1,5 +1,5 @@
 import styles from "./WorkHistory.module.css";
-import RogersPhoto from "../../assets/images/res_pic.jpg";
+import RogersPhoto from "/assets/images/res_pic.jpg";
 export default function WorkHistory() {
   return (
     <div className={styles.container}>
