@@ -1,5 +1,5 @@
 import styles from "./Portfolio.module.css";
-import PortfolioIcon from "../../assets/images/change.jpg";
+import PortfolioIcon from "/assets/images/change.jpg";
 
 export default function Portfolio() {
   return (
