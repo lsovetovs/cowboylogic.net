@@ -19,8 +19,8 @@ const Arrow = ({ className, style, onClick, direction }) => (
 
 const SliderComponent = () => {
   const slides = [
-    { id: 1, image: img1, text: "Explore New Books" },
-    { id: 2, image: img2, text: "Find Your Next Adventure" },
+    { id: 1, image: img1, text: "CLStrategy" },
+    { id: 2, image: img2, text: "CLPublishing" },
   ];
 
   const settings = {
