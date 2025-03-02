@@ -8,7 +8,7 @@ const Header = () => {
    
           <Link to="/" className={styles.logo}>Cowboylogic</Link>
           <p className={styles.tagline}>
-          Cowboylogic Strategies</p>
+          Cowboylogic Strategies/Publishing</p>
         
       </div>
     </header>
