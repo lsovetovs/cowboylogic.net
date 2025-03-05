@@ -17,7 +17,7 @@ const Arrow = ({ className, style, onClick, direction }) => (
   </div>
 );
 
-const SliderComponent = () => {
+const SliderPublishing = () => {
   const slides = [
     { id: 1, image: img1, text: "#" },
     { id: 2, image: img2, text: "#" },
@@ -52,4 +52,4 @@ const SliderComponent = () => {
   );
 };
 
-export default SliderComponent;
+export default SliderPublishing;
