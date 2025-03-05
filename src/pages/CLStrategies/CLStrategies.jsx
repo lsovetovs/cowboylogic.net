@@ -1,4 +1,4 @@
-import styles from './CLStrategies.module.scss';
+import styles from './CLStrategies.module.css';
 
 const CLStrategies = () => {
   return (

@@ -1,4 +1,4 @@
-import styles from './CLPublishing.module.scss';
+import styles from './CLPublishing.module.css';
 
 const CLPublishing = () => {
   return (
