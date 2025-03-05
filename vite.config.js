@@ -11,7 +11,8 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  base: "/staging/",
+  // base: "/staging/",
+  base: "/",
   plugins: [react()],
   build: {
     outDir: "dist", // Куди буде збережений білд
