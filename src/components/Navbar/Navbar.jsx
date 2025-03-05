@@ -131,7 +131,7 @@ export const Navbar = () => {
               onClick={(e) => toggleDropdown("clstrategies", e)}
             >
               CLStrategies
-            </NavLink>
+            
             {openDropdown === "clstrategies" && (
               <div className={styles.dropdownMenu}>
                 <NavLink to="/clstrategies" className={styles.dropdownItem}>
@@ -148,6 +148,7 @@ export const Navbar = () => {
                 </NavLink>
               </div>
             )}
+            </NavLink>
           </div>
 
           {/* CLPublishing з випадаючим меню */}
