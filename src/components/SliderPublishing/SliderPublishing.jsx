@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from "./SliderPublishing.module.css";
 
 import img1 from "/assets/images/image005.jpg";
-import img2 from "/assets/images/image005.jpg";
+import img2 from "/assets/images/image006.jpg";
 
 // Функція для кастомних стрілок
 const Arrow = ({ className, style, onClick, direction }) => (
