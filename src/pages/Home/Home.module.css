@@ -3,6 +3,7 @@
     margin: 0 auto; /* Центруємо по горизонталі */
     padding: 20px;
     background-color: #1b1b1b
+    
 ; /* Світлий фон для контенту */
    
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Легка тінь */
@@ -38,4 +39,9 @@
     display: flex;
     justify-content: center;
   }
-  
+  @font-face {
+    font-family: 'Bleeding_Cowboys';
+    src: url('fonts/Bleeding_Cowboys.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }

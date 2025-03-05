@@ -6,3 +6,9 @@ container {
   height: 100vh;
   width: 1200px;
 }
+@font-face {
+  font-family: 'Marlboro';
+  src: url('./Fonts/Marlboro.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
