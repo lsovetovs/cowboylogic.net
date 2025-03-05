@@ -33,15 +33,13 @@ export const Navbar = () => {
           <NavLink to="/about" className={buildLinkClass}>
             About
           </NavLink>
-          <NavLink to="/portfolio" className={buildLinkClass}>
-            Portfolio
+          <NavLink to="/clstrategies" className={buildLinkClass}>
+            CLStrategies
           </NavLink>
-          <NavLink to="/education" className={buildLinkClass}>
-            Education
+          <NavLink to="/clpublishing" className={buildLinkClass}>
+            CLPublishing
           </NavLink>
-          <NavLink to="/work-history" className={buildLinkClass}>
-            Work History
-          </NavLink>
+
           <NavLink to="/contact" className={buildLinkClass}>
             Contact
           </NavLink>
@@ -59,7 +57,7 @@ export const Navbar = () => {
               height={20}
               width={20}
               className={styles.searchIcon}
-              ></img>
+            ></img>
           </button>
         </nav>
       </div>

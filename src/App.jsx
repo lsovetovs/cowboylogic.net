@@ -9,11 +9,13 @@ import Footer from "./components/Footer/Footer";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const About = lazy(() => import("./pages/About/About"));
-const Portfolio = lazy(() => import("./pages/Portfolio/Portfolio"));
-const Education = lazy(() => import("./pages/Education/Education"));
-const WorkHistory = lazy(() => import("./pages/WorkHistory/WorkHistory"));
+// const Portfolio = lazy(() => import("./pages/Portfolio/Portfolio"));
+// const Education = lazy(() => import("./pages/Education/Education"));
+// const WorkHistory = lazy(() => import("./pages/WorkHistory/WorkHistory"));
 const Contact = lazy(() => import("./pages/Contact/Contact"));
 const BookStore = lazy(() => import("./pages/BookStore/BookStore"));
+const CLStrategies = lazy(() => import("./pages/CLStrategies/CLStrategies"));
+const CLPublishing = lazy(() => import("./pages/CLPublishing/CLPublishing"));
 
 const App = () => {
   return (
@@ -24,9 +26,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/education" element={<Education />} />
-          <Route path="/work-history" element={<WorkHistory />} />
+          <Route path="/clstrategies" element={<CLStrategies />} />
+          <Route path="/clpublishing" element={<CLPublishing />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/bookstore" element={<BookStore />} />
         </Routes>
