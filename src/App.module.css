@@ -8,7 +8,7 @@ container {
 }
 @font-face {
   font-family: 'Marlboro';
-  src: url('./Fonts/Marlboro.ttf') format('truetype');
+  src: url('/Fonts/Marlboro.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
 }

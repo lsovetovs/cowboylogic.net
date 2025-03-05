@@ -39,9 +39,3 @@
     display: flex;
     justify-content: center;
   }
-  @font-face {
-    font-family: 'Bleeding_Cowboys';
-    src: url('fonts/Bleeding_Cowboys.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
