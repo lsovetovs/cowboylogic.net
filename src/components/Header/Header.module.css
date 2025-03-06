@@ -1,15 +1,22 @@
-.header {
-    
-    padding: 15px 20px;
+header {
+  padding: 15px 20px;
   
   }
   
   .logo {
-    text-decoration: none;
-    color: #dddddd;
+    font-family: var(--font-family-logo), sans-serif; /* Використання змінної */
     font-size: 70px;
     font-weight: bold;
-    line-height: 1.5;
-    line-spacing: 3;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    color: white;
   }
+
+  /* @font-face .logo {
+    font-family: 'Marlboro', sans-serif;
+    src: url('/Fonts/Marlboro.ttf') format('truetype');
+  font-weight: 600;
+    font-style: normal;
+  } */
   

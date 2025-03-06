@@ -6,9 +6,9 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.container}>
    
-          <Link to="/" className={styles.logo}>Cowboylogic</Link>
+          <Link to="/" className={styles.logo}>CowboyLogic</Link>
           <p className={styles.tagline}>
-          Cowboylogic Strategies/Publishing</p>
+          CowboyLogic Strategies/Publishing</p>
         
       </div>
     </header>

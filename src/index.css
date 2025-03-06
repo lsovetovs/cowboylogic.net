@@ -1,25 +1,28 @@
 :root {
-  font-weight: 600;
+  /* font-weight: 600;
 
   font-style: normal;
   line-height: 1.5;
   color-scheme: light dark;
   color: #ddddd;
-  background-color: #242424;
+  background-color: #242424; */
+  --font-family-body: 'PlayfairDisplay-VariableFont_wght', sans-serif;
+  --font-family-logo: 'Marlboro', sans-serif;
+
 }
-/* @font-face {
-  font-family: 'Bleeding_Cowboys';
-  src: url('fonts/Bleeding_Cowboys.ttf') format('truetype');
+@font-face {
+  font-family: 'Marlboro';
+  src: url('/public/Fonts/Marlboro.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-} */
+}
 body {
   background-image: url(/assets/images/body_bg_cowboy.jpg);
   background-repeat: round;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Marlboro', sans-serif;
+  font-family: inherit;
   
 }
 
