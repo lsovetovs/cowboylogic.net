@@ -7,7 +7,7 @@ header {
     font-family: var(--font-family-logo), sans-serif; /* Використання змінної */
     font-size: 70px;
     font-weight: bold;
-    text-transform: uppercase;
+    
     letter-spacing: 2px;
     text-decoration: none;
     color: white;
