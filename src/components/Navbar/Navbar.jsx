@@ -81,7 +81,6 @@
 
 // export default Navbar;
 
-
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import styles from "./Navbar.module.css";
@@ -108,7 +107,7 @@ export const Navbar = () => {
   };
 
   const toggleDropdown = (menuName, event) => {
-    event.preventDefault(); // Запобігає перезавантаженню при кліку
+    event.preventDefault();
     setOpenDropdown(openDropdown === menuName ? null : menuName);
   };
 
@@ -131,23 +130,31 @@ export const Navbar = () => {
               onClick={(e) => toggleDropdown("clstrategies", e)}
             >
               CLStrategies
-            
-            {openDropdown === "clstrategies" && (
-              <div className={styles.dropdownMenu}>
-                <NavLink to="/clstrategies" className={styles.dropdownItem}>
-                  CLStrategies Home
-                </NavLink>
-                <NavLink to="/clstrategies/cowboy-college-consulting" className={styles.dropdownItem}>
-                Cowboy College Consulting
-                </NavLink>
-                <NavLink to="/clstrategies/cowboy-college-start-up" className={styles.dropdownItem}>
-                  Cowboy College Start-up
-                </NavLink>
-                <NavLink to="/clstrategies/cowboy-college-leadership" className={styles.dropdownItem}>
-                  Cowboy College Leadership
-                </NavLink>
-              </div>
-            )}
+              {openDropdown === "clstrategies" && (
+                <div className={styles.dropdownMenu}>
+                  <NavLink to="/clstrategies" className={styles.dropdownItem}>
+                    CLStrategies Home
+                  </NavLink>
+                  <NavLink
+                    to="/clstrategies/cowboy-college-consulting"
+                    className={styles.dropdownItem}
+                  >
+                    Cowboy College Consulting
+                  </NavLink>
+                  <NavLink
+                    to="/clstrategies/cowboy-college-start-up"
+                    className={styles.dropdownItem}
+                  >
+                    Cowboy College Start-up
+                  </NavLink>
+                  <NavLink
+                    to="/clstrategies/cowboy-college-leadership"
+                    className={styles.dropdownItem}
+                  >
+                    Cowboy College Leadership
+                  </NavLink>
+                </div>
+              )}
             </NavLink>
           </div>
 
@@ -159,24 +166,31 @@ export const Navbar = () => {
               onClick={(e) => toggleDropdown("clpublishing", e)}
             >
               CLPublishing
-            
-            {openDropdown === "clpublishing" && (
-              <div className={styles.dropdownMenu}>
-                <NavLink to="/clpublishing" className={styles.dropdownItem}>
-                  CLPublishing Home
-                </NavLink>
-                <NavLink to="/clpublishing/cowboy-college-pub/author" className={styles.dropdownItem}>
-                Cowboy College Pub/Author
-                </NavLink>
-                <NavLink to="/clpublishing/books-books" className={styles.dropdownItem}>
-                  Books Books
-                </NavLink>
-                <NavLink to="/clpublishing/b2b-bookstores" className={styles.dropdownItem}>
-                  B2B Bookstores
-                </NavLink>
-              
-              </div>
-            )}
+              {openDropdown === "clpublishing" && (
+                <div className={styles.dropdownMenu}>
+                  <NavLink to="/clpublishing" className={styles.dropdownItem}>
+                    CLPublishing Home
+                  </NavLink>
+                  <NavLink
+                    to="/clpublishing/cowboy-college-pub/author"
+                    className={styles.dropdownItem}
+                  >
+                    Cowboy College Pub/Author
+                  </NavLink>
+                  <NavLink
+                    to="/clpublishing/books-books"
+                    className={styles.dropdownItem}
+                  >
+                    Books Books
+                  </NavLink>
+                  <NavLink
+                    to="/clpublishing/b2b-bookstores"
+                    className={styles.dropdownItem}
+                  >
+                    B2B Bookstores
+                  </NavLink>
+                </div>
+              )}
             </NavLink>
           </div>
 
@@ -186,7 +200,6 @@ export const Navbar = () => {
           <NavLink to="/bookstore" className={buildLinkClass}>
             CLP Book Store
           </NavLink>
-
           {/* Кнопка пошуку */}
           <button
             className={styles.searchButton}

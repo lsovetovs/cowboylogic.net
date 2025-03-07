@@ -1,90 +1,14 @@
-/* 
 .navbar {
   background-color: #222;
   padding: 10px 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-.container {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .navLinks {
-  display: flex;
-  gap: 15px;
-}
-
-.navLink {
-  text-decoration: none;
-  color: white;
-  font-size: 16px;
-}
-
-.navLink:hover {
-  text-decoration: underline;
-}
-
-.searchButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-left: 15px;
-}
-
-.searchIcon {
-  filter: invert(1); 
-}
-
-
-.searchContainer {
-  width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 10px;
-}
-
-.searchForm {
-  display: flex;
-  width: 100%;
-  background: white;
-  padding: 10px;
-  border-radius: 5px;
-  text-align: center;
-  
-}
-
-.searchInput {
-  width: 80%;
-  padding: 8px;
-  border: 1px solid #5A2D0C;
-  border-radius: 5px;
-  width: 100%;
-  font-size: 16px;
-  background-color: #FFFFFF;
-}
- */
- .navbar {
-  background-color: #222;
-  padding: 10px 20px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-}
-
-.container {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navLinks {
-  display: flex;
   gap: 15px;
 }
 
@@ -97,10 +21,9 @@
 }
 
 .navLink:hover {
-  text-decoration: underline;
+  color: #f4a261; 
 }
 
-/* Випадаюче меню */
 .dropdown {
   position: relative;
 }
@@ -119,7 +42,6 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Меню, яке випадає */
 .dropdownMenu {
   position: absolute;
   top: 40px;
@@ -149,12 +71,12 @@
   border: none;
   cursor: pointer;
   margin-left: 15px;
+
 }
 
 .searchIcon {
-  filter: invert(1); 
+  filter: invert(1);
 }
-
 
 .searchContainer {
   width: 100%;
@@ -170,15 +92,14 @@
   padding: 10px;
   border-radius: 5px;
   text-align: center;
-  
 }
 
 .searchInput {
   width: 80%;
   padding: 8px;
-  border: 1px solid #5A2D0C;
+  border: 1px solid #5a2d0c;
   border-radius: 5px;
   width: 100%;
   font-size: 16px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
