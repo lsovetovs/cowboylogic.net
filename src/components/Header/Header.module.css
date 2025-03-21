@@ -3,7 +3,7 @@ header {
     }
   
   .logo {
-    font-family: var(--font-family-logo), sans-serif; 
+    font-family: var(--font-family-body), sans-serif; 
     font-size: 70px;
     font-weight: bold;
     /* text-transform: uppercase; */
