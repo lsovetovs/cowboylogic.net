@@ -14,6 +14,7 @@ const About = lazy(() => import("./pages/About/About"));
 // const WorkHistory = lazy(() => import("./pages/WorkHistory/WorkHistory"));
 const Contact = lazy(() => import("./pages/Contact/Contact"));
 const BookStore = lazy(() => import("./pages/BookStore/BookStore"));
+const BookDetails = lazy(() => import("./pages/BookDetails/BookDetails"));
 const CLStrategies = lazy(() => import("./pages/CLStrategies/CLStrategies"));
 const CLPublishing = lazy(() => import("./pages/CLPublishing/CLPublishing"));
 
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/clpublishing" element={<CLPublishing />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/bookstore" element={<BookStore />} />
+          <Route path="/bookstore/book/:id" element={<BookDetails />} />
         </Routes>
       </Suspense>
       <Footer />

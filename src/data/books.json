@@ -1,0 +1,21 @@
+{
+    "books": [
+      {
+        "id": 1,
+        "title": "JavaScript for Beginners",
+        "author": "John Doe",
+        "description": "Повний посібник з основ JavaScript.",
+        "price": 15.99,
+        "image": "/assets/images/book1.jpg"
+      },
+      {
+        "id": 2,
+        "title": "React Mastery",
+        "author": "Jane Smith",
+        "description": "Розширене керівництво з React.js.",
+        "price": 24.99,
+        "image": "/assets/images/book2.jpg"
+      }
+    ]
+  }
+  

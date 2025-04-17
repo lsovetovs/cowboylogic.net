@@ -36,7 +36,7 @@ export const Navbar = () => {
             Home
           </NavLink>
           <NavLink to="/about" className={buildLinkClass}>
-            Abou
+            About
           </NavLink>
 
           {/* CLStrategies з випадаючим меню */}
