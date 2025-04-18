@@ -1,10 +1,3 @@
-// import BookForm from "../../components/BookForm/BookForm";
-
-// const EditBook = () => {
-//   return <BookForm />;
-// };
-
-// export default EditBook;
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "../../store/axios";
@@ -26,12 +19,20 @@ const EditBook = () => {
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
       .get(`/books/${id}`)
-      .then((res) => setFormData(res.data))
-      .catch(() => setError("Failed to load book"));
+      .then((res) => {
+        const { title, author, description, price, imageUrl, inStock } = res.data;
+        setFormData({ title, author, description, price, imageUrl, inStock });
+        setLoading(false);
+      })
+      .catch(() => {
+        setError("❌ Failed to load book");
+        setLoading(false);
+      });
   }, [id]);
 
   const handleChange = (e) => {
@@ -44,34 +45,33 @@ const EditBook = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const { id, ...dataToSend } = formData;
+    setError(null);
+    setSuccess(null);
 
     try {
-      await axios.put(`/books/${id}`, dataToSend, {
+      await axios.put(`/books/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
-      setSuccess("Book updated successfully");
-      setError(null);
-
+      setSuccess("✅ Book updated successfully");
       setTimeout(() => navigate("/bookstore"), 1500);
     } catch (err) {
       setError(err.response?.data?.message || "Update failed");
-      setSuccess(null);
     }
   };
 
+  if (loading) return <p>Loading...</p>;
+
   return (
-    <div className="edit-book-page">
+    <div className="edit-book-page" style={{ padding: "1rem" }}>
       <h2>Edit Book</h2>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>{success}</p>}
+      {error && <p style={{ color: "red", marginBottom: "1rem" }}>{error}</p>}
+      {success && <p style={{ color: "green", marginBottom: "1rem" }}>{success}</p>}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <label>
           Title:
           <input name="title" value={formData.title} onChange={handleChange} required />
@@ -114,7 +114,7 @@ const EditBook = () => {
           />
         </label>
 
-        <button type="submit">Update Book</button>
+        <button type="submit">💾 Update Book</button>
       </form>
     </div>
   );
