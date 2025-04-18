@@ -1,0 +1,19 @@
+.actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .actions button {
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    border-radius: 4px;
+    background: #222;
+    color: white;
+    border: none;
+  }
+  
+  .actions button:hover {
+    background: #555;
+  }
+  

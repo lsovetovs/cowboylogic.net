@@ -1,22 +1,3 @@
-// import { Link } from "react-router-dom";
-// import styles from "./Header.module.css";
-
-// const Header = () => {
-//   return (
-//     <header className={styles.header}>
-//       <div className={styles.container}>
-   
-//           <Link to="/" className={styles.logo}>CowboyLogic</Link>
-//           <p className={styles.tagline}>
-//           CowboyLogic Strategies/Publishing</p>
-        
-//       </div>
-//     </header>
-//   );
-// };
-
-// export default Header;
-
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import styles from "./Header.module.css";
@@ -28,15 +9,26 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.leftBlock}>
-          <Link to="/" className={styles.logo}>CowboyLogic</Link>
-          <p className={styles.tagline}>
-            CowboyLogic Strategies/Publishing
-          </p>
+          <Link to="/" className={styles.logo}>
+            CowboyLogic
+          </Link>
+          <p className={styles.tagline}>CowboyLogic Strategies/Publishing</p>
         </div>
 
         <div className={styles.authBlock}>
           {user ? (
             <>
+              {user && (
+                <Link to="/cart" className={styles.authBtn}>
+                  🛒 Cart
+                </Link>
+              )}
+              {user && (
+                <Link to="/orders" className={styles.authBtn}>
+                  📦 My Orders
+                </Link>
+              )}
+
               <span className={styles.userEmail}>Welcome, {user.email}</span>
               <button className={styles.logoutBtn} onClick={logout}>
                 Logout
@@ -44,8 +36,12 @@ const Header = () => {
             </>
           ) : (
             <>
-              <Link to="/login" className={styles.authBtn}>Login</Link>
-              <Link to="/register" className={styles.authBtn}>Register</Link>
+              <Link to="/login" className={styles.authBtn}>
+                Login
+              </Link>
+              <Link to="/register" className={styles.authBtn}>
+                Register
+              </Link>
             </>
           )}
         </div>

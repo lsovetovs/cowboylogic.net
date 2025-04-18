@@ -7,6 +7,10 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 
+// ✅ Захист маршрутів
+import AdminRoute from "./routes/AdminRoute";
+import PrivateRoute from "./routes/PrivateRoute"; // можна додати пізніше
+
 const Home = lazy(() => import("./pages/Home/Home"));
 const About = lazy(() => import("./pages/About/About"));
 const Contact = lazy(() => import("./pages/Contact/Contact"));
@@ -17,9 +21,9 @@ const CLPublishing = lazy(() => import("./pages/CLPublishing/CLPublishing"));
 const Register = lazy(() => import("./pages/Register/Register"));
 const AddBook = lazy(() => import("./pages/Admin/AddBook"));
 const EditBook = lazy(() => import("./pages/Admin/EditBook"));
-
-// 💡 Додали сторінку логіну
 const Login = lazy(() => import("./pages/Login/Login"));
+const Orders = lazy(() => import("./pages/Orders/Orders"));
+const Cart = lazy(() => import("./pages/Cart/Cart"));
 
 const App = () => {
   return (
@@ -35,12 +39,42 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/bookstore" element={<BookStore />} />
           <Route path="/bookstore/book/:id" element={<BookDetails />} />
-
-          {/* ✅ новий маршрут для логіну */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/admin/books/new" element={<AddBook />} />
-          <Route path="/admin/books/edit/:id" element={<EditBook />} />
+
+          {/* 🔐 Адмінські сторінки */}
+          <Route
+            path="/admin/books/new"
+            element={
+              <AdminRoute>
+                <AddBook />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/books/edit/:id"
+            element={
+              <AdminRoute>
+                <EditBook />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <PrivateRoute>
+                <Orders />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <PrivateRoute>
+                <Cart />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </Suspense>
       <Footer />

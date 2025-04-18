@@ -3,6 +3,7 @@ import { useState } from "react";
 import styles from "./Navbar.module.css";
 import clsx from "clsx";
 import searchIcon from "/assets/svg/search-icon.svg";
+import { useAuth } from "../../context/AuthContext";
 
 const buildLinkClass = ({ isActive }) =>
   clsx(styles.navLink, isActive && styles.active);
@@ -13,6 +14,7 @@ export const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -114,6 +116,12 @@ export const Navbar = () => {
           <NavLink to="/contact" className={buildLinkClass}>
             Contact
           </NavLink>
+          {user?.role === "admin" && (
+            <NavLink to="/admin/books/new" className={buildLinkClass}>
+              Add Book
+            </NavLink>
+          )}
+
           <NavLink to="/bookstore" className={buildLinkClass}>
             CLP Book Store
           </NavLink>

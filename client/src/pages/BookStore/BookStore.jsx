@@ -21,6 +21,11 @@ const BookStore = () => {
     navigate("/admin/books/new");
   };
 
+  // 🗑️ Видалення книги з локального стану
+  const handleDelete = (id) => {
+    setBooks((prev) => prev.filter((book) => book.id !== id));
+  };
+
   return (
     <div className={styles.bookStore}>
       <h1>CLP BookStore</h1>
@@ -32,7 +37,7 @@ const BookStore = () => {
         </button>
       )}
 
-      <BookList books={books} />
+      <BookList books={books} onDelete={handleDelete} />
     </div>
   );
 };
