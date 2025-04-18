@@ -1,0 +1,13 @@
+header {
+  padding: 15px 20px;
+    }
+  
+  .logo {
+    font-family: var(--font-family-body), sans-serif; 
+    font-size: 70px;
+    font-weight: bold;
+    /* text-transform: uppercase; */
+    letter-spacing: 2px;
+    text-decoration: none;
+    color: white;
+  }
