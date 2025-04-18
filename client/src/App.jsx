@@ -15,6 +15,8 @@ const BookDetails = lazy(() => import("./pages/BookDetails/BookDetails"));
 const CLStrategies = lazy(() => import("./pages/CLStrategies/CLStrategies"));
 const CLPublishing = lazy(() => import("./pages/CLPublishing/CLPublishing"));
 const Register = lazy(() => import("./pages/Register/Register"));
+const AddBook = lazy(() => import("./pages/Admin/AddBook"));
+const EditBook = lazy(() => import("./pages/Admin/EditBook"));
 
 // 💡 Додали сторінку логіну
 const Login = lazy(() => import("./pages/Login/Login"));
@@ -37,6 +39,8 @@ const App = () => {
           {/* ✅ новий маршрут для логіну */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/admin/books/new" element={<AddBook />} />
+          <Route path="/admin/books/edit/:id" element={<EditBook />} />
         </Routes>
       </Suspense>
       <Footer />

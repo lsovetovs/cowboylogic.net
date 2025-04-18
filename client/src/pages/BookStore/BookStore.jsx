@@ -1,33 +1,37 @@
-// import styles from './BookStore.module.css';
-// // import Hero from '../../components/Hero/Hero';
-
-
-// const BookStore = () => {
-//   return (
-//     <div className={styles.container}>
-//       {/* <Hero title="BookStore" /> */}
-//     </div>
-//   );
-// };
-
-// export default BookStore;
-
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BookList from "../../components/BookList/BookList";
-import booksData from "../../data/books.js"; // Тимчасові дані
+import axios from "../../store/axios";
+import { useAuth } from "../../context/AuthContext";
 import styles from "./BookStore.module.css";
 
 const BookStore = () => {
   const [books, setBooks] = useState([]);
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setBooks(booksData); // Імітуємо отримання даних
+    axios
+      .get("/books")
+      .then((res) => setBooks(res.data))
+      .catch((err) => console.error("Failed to fetch books:", err));
   }, []);
+
+  const handleAddBook = () => {
+    navigate("/admin/books/new");
+  };
 
   return (
     <div className={styles.bookStore}>
       <h1>CLP BookStore</h1>
-      <button className={styles.addButton}>Add Book</button>
+
+      {/* 🔐 Кнопка "Add Book" тільки для адміна */}
+      {user?.role === "admin" && (
+        <button onClick={handleAddBook} className={styles.addButton}>
+          Add Book
+        </button>
+      )}
+
       <BookList books={books} />
     </div>
   );
