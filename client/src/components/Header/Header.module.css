@@ -11,3 +11,36 @@ header {
     text-decoration: none;
     color: white;
   }
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .authBlock {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .authBtn,
+  .logoutBtn {
+    background: transparent;
+    border: 1px solid white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .authBtn:hover,
+  .logoutBtn:hover {
+    background: white;
+    color: #1a1a1a;
+  }
+  
+  .userEmail {
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
