@@ -24,6 +24,7 @@ const EditBook = lazy(() => import("./pages/Admin/EditBook"));
 const Login = lazy(() => import("./pages/Login/Login"));
 const Orders = lazy(() => import("./pages/Orders/Orders"));
 const Cart = lazy(() => import("./pages/Cart/Cart"));
+const UserManagement = lazy(() => import("./pages/Admin/UserManagement"));
 
 const App = () => {
   return (
@@ -75,6 +76,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route path="/admin/users" element={<UserManagement />} />
         </Routes>
       </Suspense>
       <Footer />

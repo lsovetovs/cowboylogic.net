@@ -18,14 +18,17 @@ const Header = () => {
         <div className={styles.authBlock}>
           {user ? (
             <>
-              {user && (
-                <Link to="/cart" className={styles.authBtn}>
-                  🛒 Cart
-                </Link>
-              )}
-              {user && (
-                <Link to="/orders" className={styles.authBtn}>
-                  📦 My Orders
+              <Link to="/cart" className={styles.authBtn}>
+                🛒 Cart
+              </Link>
+              <Link to="/orders" className={styles.authBtn}>
+                📦 My Orders
+              </Link>
+
+              {/* 🔐 Доступно тільки для адміна */}
+              {user.role === "admin" && (
+                <Link to="/admin/users" className={styles.authBtn}>
+                  🛠 Manage Users
                 </Link>
               )}
 
