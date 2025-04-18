@@ -30,13 +30,33 @@ const getBookById = async (req, res) => {
   res.json(book);
 };
 
+// const updateBook = async (req, res) => {
+//   const book = await Book.findByPk(req.params.id);
+//   if (!book) {
+//     throw HttpError(404, "Book not found");
+//   }
+
+//   await book.update(req.body);
+//   res.json(book);
+// };
+
 const updateBook = async (req, res) => {
   const book = await Book.findByPk(req.params.id);
   if (!book) {
     throw HttpError(404, "Book not found");
   }
 
-  await book.update(req.body);
+  // ❗ Дозволені тільки ці поля
+  const allowedFields = ["title", "author", "description", "price", "imageUrl", "inStock"];
+  const updateData = {};
+
+  for (const field of allowedFields) {
+    if (req.body[field] !== undefined) {
+      updateData[field] = req.body[field];
+    }
+  }
+
+  await book.update(updateData);
   res.json(book);
 };
 
