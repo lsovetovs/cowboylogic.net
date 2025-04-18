@@ -6,10 +6,18 @@ import morgan from "morgan";
 import { sequelize } from "./config/db.js";
 
 import "./models/Book.js";
+import "./models/CartItem.js";
+import "./models/Order.js";
+import "./models/OrderItem.js";
+
+
 
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import bookRoutes from "./routes/bookRoutes.js";
+import cartRoutes from "./routes/cartRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
+
 
 import { errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
@@ -29,6 +37,8 @@ app.use(morgan("dev"));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/books", bookRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/orders", orderRoutes);
 
 // Error middleware
 app.use(errorHandler);
