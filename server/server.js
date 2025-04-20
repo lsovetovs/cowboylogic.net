@@ -17,6 +17,7 @@ import userRoutes from "./routes/userRoutes.js";
 import bookRoutes from "./routes/bookRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import pagesRoutes from "./routes/pagesRoutes.js";
 
 
 import { errorHandler } from "./middleware/errorMiddleware.js";
@@ -39,6 +40,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/pages", pagesRoutes);
 
 // Error middleware
 app.use(errorHandler);
