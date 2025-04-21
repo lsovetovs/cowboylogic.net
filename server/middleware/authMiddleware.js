@@ -14,7 +14,8 @@ export const protect = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findByPk(decoded.id); // якщо UUID, Sequelize by default
+    const user = await User.findByPk(decoded.id);
+
     if (!user) {
       return res.status(401).json({ message: "User not found" });
     }
@@ -23,7 +24,9 @@ export const protect = async (req, res, next) => {
       id: user.id,
       email: user.email,
       role: user.role,
+      isSuperAdmin: user.isSuperAdmin, // ✅ додано
     };
+
     next();
   } catch (error) {
     res.status(401).json({ message: "Invalid token" });
@@ -36,4 +39,11 @@ export const isAdmin = (req, res, next) => {
   } else {
     res.status(403).json({ message: "Access denied. Admins only." });
   }
+};
+
+export const isSuperAdmin = (req, res, next) => {
+  if (req.user?.isSuperAdmin) {
+    return next();
+  }
+  return res.status(403).json({ message: "Access denied. Super admin only." });
 };

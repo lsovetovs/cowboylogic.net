@@ -4,81 +4,86 @@ import { useAuth } from "../../context/AuthContext";
 import styles from "./UserManagement.module.css";
 
 const UserManagement = () => {
-  const { token, user } = useAuth();
   const [users, setUsers] = useState([]);
-  const [error, setError] = useState("");
+  const { token } = useAuth();
 
   useEffect(() => {
-    if (!user || user.role !== "admin") return;
+    fetchUsers();
+  }, []);
 
-    axios
-      .get("/users", {
+  const fetchUsers = async () => {
+    try {
+      const res = await axios.get("/users", {
         headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => setUsers(res.data))
-      .catch(() => setError("Failed to load users"));
-  }, [token, user]);
+      });
+      setUsers(res.data);
+    } catch (err) {
+      console.error("Failed to fetch users", err);
+    }
+  };
 
   const handleRoleChange = async (id, newRole) => {
     try {
-      await axios.patch(
-        `/users/${id}/role`,
+      await axios.put(
+        `/users/${id}`,
         { role: newRole },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setUsers((prev) =>
-        prev.map((u) => (u.id === id ? { ...u, role: newRole } : u))
-      );
-    } catch {
-      alert("Failed to update role");
+      fetchUsers();
+    } catch (err) {
+      alert(err.response?.data?.message || "Update failed");
     }
   };
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
-
     try {
       await axios.delete(`/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setUsers((prev) => prev.filter((u) => u.id !== id));
-    } catch {
-      alert("Failed to delete user");
+      fetchUsers();
+    } catch (err) {
+      alert(err.response?.data?.message || "Delete failed");
     }
   };
 
-  if (user?.role !== "admin") {
-    return <p>⛔ Access denied. Admins only.</p>;
-  }
-
   return (
-    <div className={styles.userManagement}>
+    <div className={styles.container}>
       <h2>User Management</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      <table>
+      <table className={styles.userTable}>
         <thead>
           <tr>
             <th>Email</th>
             <th>Role</th>
+            <th>Created</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {users.map(({ id, email, role }) => (
-            <tr key={id}>
-              <td>{email}</td>
+          {users.map((u) => (
+            <tr key={u.id}>
               <td>
-                <select
-                  value={role}
-                  onChange={(e) => handleRoleChange(id, e.target.value)}
-                >
-                  <option value="user">User</option>
-                  <option value="admin">Admin</option>
-                </select>
+                {u.email}
+                {u.isSuperAdmin && " 👑"}
               </td>
               <td>
-                <button onClick={() => handleDelete(id)}>🗑 Delete</button>
+                {u.isSuperAdmin ? (
+                  <strong>super admin</strong>
+                ) : (
+                  <select
+                    value={u.role}
+                    onChange={(e) => handleRoleChange(u.id, e.target.value)}
+                  >
+                    <option value="user">user</option>
+                    <option value="admin">admin</option>
+                  </select>
+                )}
+              </td>
+              <td>{new Date(u.createdAt).toLocaleDateString()}</td>
+              <td>
+                {!u.isSuperAdmin && (
+                  <button onClick={() => handleDelete(u.id)}>Delete</button>
+                )}
               </td>
             </tr>
           ))}

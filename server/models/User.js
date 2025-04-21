@@ -24,6 +24,13 @@ const User = sequelize.define("User", {
     type: DataTypes.ENUM("user", "admin"),
     defaultValue: "user",
   },
+  // server/models/User.js
+
+isSuperAdmin: {
+  type: DataTypes.BOOLEAN,
+  defaultValue: false,
+},
+
 }, {
   timestamps: true,
 });

@@ -17,4 +17,19 @@
   th {
     background-color: #f4f4f4;
   }
-  
+  /* UserManagement.module.css */
+.container {
+  padding: 1rem;
+}
+.userTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+.userTable th,
+.userTable td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+.userTable select {
+  padding: 4px;
+}
