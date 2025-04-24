@@ -6,19 +6,25 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => localStorage.getItem("token"));
+  const [isLoading, setIsLoading] = useState(true); // додано
 
   useEffect(() => {
-    if (token) {
-      axios
-        .get("/auth/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((res) => setUser(res.data))
-        .catch(() => {
+    const fetchUser = async () => {
+      if (token) {
+        try {
+          const res = await axios.get("/auth/me", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setUser(res.data);
+        } catch (err) {
           setToken(null);
           localStorage.removeItem("token");
-        });
-    }
+        }
+      }
+      setIsLoading(false); // завершення ініціалізації
+    };
+
+    fetchUser();
   }, [token]);
 
   const login = async (data) => {
@@ -42,7 +48,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, register, logout }}>
+    <AuthContext.Provider
+      value={{ user, token, login, register, logout, isLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );

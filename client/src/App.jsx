@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import styles from "./App.module.css";
+import { useAuth } from "./context/AuthContext";
 
 import Loader from "./components/Loader/Loader";
 import Header from "./components/Header/Header";
@@ -9,7 +10,7 @@ import Footer from "./components/Footer/Footer";
 
 // ✅ Захист маршрутів
 import AdminRoute from "./routes/AdminRoute";
-import PrivateRoute from "./routes/PrivateRoute"; // можна додати пізніше
+import PrivateRoute from "./routes/PrivateRoute";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const About = lazy(() => import("./pages/About/About"));
@@ -25,8 +26,16 @@ const Login = lazy(() => import("./pages/Login/Login"));
 const Orders = lazy(() => import("./pages/Orders/Orders"));
 const Cart = lazy(() => import("./pages/Cart/Cart"));
 const UserManagement = lazy(() => import("./pages/Admin/UserManagement"));
+const Newsletter = lazy(() => import("./pages/Admin/Newsletter"));
+const AdminDashboard = lazy(() => import("./pages/Admin/AdminDashboard"));
 
 const App = () => {
+  const { isLoading } = useAuth();
+
+  if (isLoading) {
+    return <Loader />; // Показуємо лоадер, поки не ініціалізовано user
+  }
+
   return (
     <div className={styles.container}>
       <Header />
@@ -42,6 +51,22 @@ const App = () => {
           <Route path="/bookstore/book/:id" element={<BookDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route
+            path="/orders"
+            element={
+              <PrivateRoute>
+                <Orders />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <PrivateRoute>
+                <Cart />
+              </PrivateRoute>
+            }
+          />
 
           {/* 🔐 Адмінські сторінки */}
           <Route
@@ -61,22 +86,29 @@ const App = () => {
             }
           />
           <Route
-            path="/orders"
+            path="/admin/users"
             element={
-              <PrivateRoute>
-                <Orders />
-              </PrivateRoute>
+              <AdminRoute>
+                <UserManagement />
+              </AdminRoute>
             }
           />
           <Route
-            path="/cart"
+            path="/admin/newsletter"
             element={
-              <PrivateRoute>
-                <Cart />
-              </PrivateRoute>
+              <AdminRoute>
+                <Newsletter />
+              </AdminRoute>
             }
           />
-          <Route path="/admin/users" element={<UserManagement />} />
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <AdminDashboard />
+              </AdminRoute>
+            }
+          />
         </Routes>
       </Suspense>
       <Footer />

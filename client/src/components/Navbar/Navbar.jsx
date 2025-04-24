@@ -114,14 +114,13 @@ export const Navbar = () => {
           </div>
 
           <NavLink to="/contact" className={buildLinkClass}>
-            Contact
+            ContactUs
           </NavLink>
-          {user?.role === "admin" && (
-            <NavLink to="/admin/books/new" className={buildLinkClass}>
-              Add Book
+          {user && ["admin", "superadmin"].includes(user.role) && (
+            <NavLink to="/admin" className={buildLinkClass}>
+              Admin Dashboard
             </NavLink>
           )}
-
           <NavLink to="/bookstore" className={buildLinkClass}>
             CLP Book Store
           </NavLink>

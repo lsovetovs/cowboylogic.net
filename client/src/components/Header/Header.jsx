@@ -25,13 +25,7 @@ const Header = () => {
                 📦 My Orders
               </Link>
 
-              {/* 🔐 Доступно тільки для адміна */}
-              {user.role === "admin" && (
-                <Link to="/admin/users" className={styles.authBtn}>
-                  🛠 Manage Users
-                </Link>
-              )}
-
+              {/* 👋 Вітання та вихід */}
               <span className={styles.userEmail}>Welcome, {user.email}</span>
               <button className={styles.logoutBtn} onClick={logout}>
                 Logout

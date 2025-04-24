@@ -8,7 +8,8 @@ const Newsletter = () => {
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
   const [message, setMessage] = useState(null);
-  const { token } = useAuth();
+  const { token, user } = useAuth();
+  console.log("Current user:", user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
