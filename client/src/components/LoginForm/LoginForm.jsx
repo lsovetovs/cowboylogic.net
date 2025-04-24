@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import styles from "./LoginForm.module.css";
+
 
 const LoginForm = () => {
   const { login } = useAuth();
@@ -25,7 +27,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="login-form">
+    <div className={styles["login-form"]}>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -45,7 +47,7 @@ const LoginForm = () => {
           required
         />
         <button type="submit">Log In</button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p>{error}</p>}
       </form>
     </div>
   );

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import styles from "./RegisterForm.module.css";
 
 const RegisterForm = () => {
   const { register } = useAuth();
@@ -25,7 +26,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="register-form">
+    <div className={styles["register-form"]}>
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -45,7 +46,7 @@ const RegisterForm = () => {
           required
         />
         <button type="submit">Register</button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p>{error}</p>}
       </form>
     </div>
   );

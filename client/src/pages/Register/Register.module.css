@@ -1,0 +1,7 @@
+.page {
+    display: flex;
+    justify-content: center;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+  
