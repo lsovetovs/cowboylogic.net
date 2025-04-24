@@ -19,6 +19,8 @@ import cartRoutes from "./routes/cartRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import pagesRoutes from "./routes/pagesRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
+import newsletterRoutes from "./routes/newsletterRoutes.js";
+
 
 
 import { errorHandler } from "./middleware/errorMiddleware.js";
@@ -43,6 +45,8 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/pages", pagesRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/newsletter", newsletterRoutes);
+
 
 // Error middleware
 app.use(errorHandler);

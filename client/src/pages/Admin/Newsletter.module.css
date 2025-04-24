@@ -1,0 +1,70 @@
+/* Newsletter.module.css */
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: #fff9f0;
+    border: 3px solid #8b5e3c;
+    border-radius: 12px;
+    padding: 2rem;
+    font-family: 'Georgia', serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #5c3b1e;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  
+  label {
+    display: flex;
+    flex-direction: column;
+    color: #3e2a17;
+    font-weight: bold;
+  }
+  
+  input,
+  textarea {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    border: 2px solid #c0a483;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #8b5e3c;
+    background-color: #fffaf5;
+  }
+  
+  button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    background-color: #8b5e3c;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center;
+  }
+  
+  button:hover {
+    background-color: #6f472b;
+  }
+  
+  p {
+    text-align: center;
+    color: #1f1f1f;
+    margin-top: 1rem;
+  }
+  
