@@ -1,6 +1,6 @@
-.container {
-    max-width: 800px; /* Обмежуємо ширину контейнера */
-    margin: 0 auto; /* Центруємо по горизонталі */
+/* .container {
+    max-width: 800px; 
+    margin: 0 auto; 
     padding: 20px;
     background-color: #1b1b1b; 
   }
@@ -64,4 +64,76 @@
   
   .contact button:hover {
     background-color: #F2F2F2;
+  } */
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1rem;
   }
+  
+  .contact {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    background: rgba(139, 69, 19, 0.7);
+    border: 5px solid #deb887;
+
+    padding: 2rem;
+    color: #fff8dc;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    box-sizing: border-box; /* ⬅ Виправляє поїхавші інпути */
+  }
+  
+  .contact h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    color: #fff5e1;
+  }
+  .contact input,
+.contact textarea {
+  box-sizing: border-box; /* ⬅ критично важливо */
+}
+
+  .contact input,
+  .contact textarea {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid #f4e0c9;
+    background: rgba(255, 248, 220, 0.1);
+    color: #fffaf0;
+
+    font-family: 'Georgia', serif;
+  }
+  
+  .contact input::placeholder,
+  .contact textarea::placeholder {
+    color: #f5deb3;
+  }
+  
+  .contact textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  .contact button {
+    background: #a0522d;
+    color: #fff8dc;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .contact button:hover {
+    background: #8b4513;
+  }
+  

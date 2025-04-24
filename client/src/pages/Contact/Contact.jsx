@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./Contact.module.css";
+import axios from "../../store/axios"; // або прямо 'axios'
 
 const Contact = () => {
   const [firstName, setFirstName] = useState("");
@@ -7,9 +8,15 @@ const Contact = () => {
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Form submitted");
+    try {
+      await axios.post("/contact", { firstName, lastName, email, comment });
+      alert("Message sent!");
+      setFirstName(""); setLastName(""); setEmail(""); setComment("");
+    } catch (err) {
+      alert("Failed to send message");
+    }
   };
 
   return (
