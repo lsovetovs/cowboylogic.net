@@ -5,7 +5,6 @@
     margin: 6rem auto;
     padding: 1.5rem 2rem 2.5rem; /* менше зверху, більше знизу */
     background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 12px;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
     text-align: center;
     backdrop-filter: blur(4px);

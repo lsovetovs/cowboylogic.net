@@ -1,139 +1,78 @@
-/* .container {
-    max-width: 800px; 
-    margin: 0 auto; 
-    padding: 20px;
-    background-color: #1b1b1b; 
-  }
-.contact {
-    flex: 1;
-    padding: 44px;
-    background-color: var(--white);
-    border-radius: 10px;
-    border: 1px solid var(--light-gray);
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .contact h2 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: var(--dark-blue);
-  }
-  
-  .contact p {
-    font-size: 14px;
-    color: #000000;
-    margin-bottom: 24px;
-  }
-  
-  .contact input,
-  .contact textarea {
-    width: 100%;
-    padding: 18px;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    background-color: #FFFFFF;
-    font-size: 16px;
-    color: #000000;
-    box-sizing: border-box;
-    border: none;
-    margin-bottom: 14px;
-  }
-  
-  .contact input[type="date"] {
-    padding: 18px;
-  }
-  
-  .contact button {
-    padding: 16px 60px;
-    background-color: #FFFFFF;
-    color: #000000;
-    border: none;
-    border-radius: 200px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-    text-decoration: none;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .contact button:hover {
-    background-color: #F2F2F2;
-  } */
-
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 3rem 1rem;
-  }
-  
-  .contact {
-    width: 100%;
-    max-width: 720px;
-    margin: 0 auto;
-    background: rgba(139, 69, 19, 0.7);
-    border: 5px solid #deb887;
-
-    padding: 2rem;
-    color: #fff8dc;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(4px);
-    box-sizing: border-box; /* ⬅ Виправляє поїхавші інпути */
-  }
-  
-  .contact h2 {
-    text-align: center;
-    font-size: 2.2rem;
-    margin-bottom: 2rem;
-    color: #fff5e1;
-  }
-  .contact input,
-.contact textarea {
-  box-sizing: border-box; /* ⬅ критично важливо */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
 }
 
-  .contact input,
-  .contact textarea {
-    width: 100%;
-    margin-bottom: 1.5rem;
-    padding: 0.9rem 1.2rem;
-    border: 1px solid #f4e0c9;
-    background: rgba(255, 248, 220, 0.1);
-    color: #fffaf0;
+.contact {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 12px;
+  color: #fff8dc;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  box-sizing: border-box;
+  text-align: center;
+}
 
-    font-family: 'Georgia', serif;
-  }
-  
-  .contact input::placeholder,
-  .contact textarea::placeholder {
-    color: #f5deb3;
-  }
-  
-  .contact textarea {
-    resize: vertical;
-    min-height: 120px;
-  }
-  
-  .contact button {
-    background: #a0522d;
-    color: #fff8dc;
-    padding: 0.8rem 2rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .contact button:hover {
-    background: #8b4513;
-  }
-  
+.contact h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #fff6e6;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 1.5rem;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+  transition: border 0.3s ease;
+  font-family: inherit;
+}
+
+.form input:focus,
+.form textarea:focus {
+  outline: none;
+  border: 2px solid #a0522d;
+  transform: scale(1.01);
+}
+
+.form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form button {
+  background: #8b4513;
+  color: #fff;
+  padding: 0.85rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form button:hover {
+  background: #a0522d;
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Contact.module.css";
-import axios from "../../store/axios"; // або прямо 'axios'
+import axios from "../../store/axios";
 
 const Contact = () => {
   const [firstName, setFirstName] = useState("");
@@ -13,7 +13,10 @@ const Contact = () => {
     try {
       await axios.post("/contact", { firstName, lastName, email, comment });
       alert("Message sent!");
-      setFirstName(""); setLastName(""); setEmail(""); setComment("");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setComment("");
     } catch (err) {
       alert("Failed to send message");
     }
@@ -21,37 +24,38 @@ const Contact = () => {
 
   return (
     <div className={styles.container}>
-  
-    <form className={styles.contact} onSubmit={handleSubmit}>
-      <h2>Contact</h2>
-      <input
-        type="text"
-        placeholder="FirstName*"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="LastName*"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-        required
-      />
-      <input
-        type="email"
-        placeholder="Email*"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <textarea
-        placeholder="Comment"
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-      />
-      <button type="submit">Submit</button>
-    </form>
+      <div className={styles.contact}>
+        <h2>ContactUs</h2>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="First Name*"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Last Name*"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+          <input
+            type="email"
+            placeholder="Email*"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <textarea
+            placeholder="Comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
   );
 };
