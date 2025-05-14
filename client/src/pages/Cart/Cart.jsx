@@ -47,19 +47,26 @@ const Cart = () => {
     }
   };
 
-  const handlePlaceOrder = async () => {
+  const handleStripeCheckout = async () => {
     try {
-      await axios.post(
-        "/orders",
-        {},
+      const stripeItems = items.map((item) => ({
+        title: item.Book.title,
+        price: item.Book.price,
+        quantity: item.quantity,
+      }));
+
+      const res = await axios.post(
+        "/orders/create-checkout-session",
+        { items: stripeItems },
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      alert("Order placed!");
-      fetchCart();
-    } catch {
-      alert("Order failed");
+
+      window.location.href = res.data.url;
+    } catch (err) {
+      alert("Stripe checkout failed");
+      console.error(err);
     }
   };
 
@@ -95,7 +102,7 @@ const Cart = () => {
           </ul>
 
           <h3>Total: ${totalPrice.toFixed(2)}</h3>
-          <button onClick={handlePlaceOrder}>Place Order</button>
+          <button onClick={handleStripeCheckout}>Checkout with Stripe</button>
         </>
       )}
     </div>

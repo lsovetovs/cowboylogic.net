@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:5000/api", // або твій продакшн бекенд
+  baseURL: "http://localhost:5000/api", 
+  // baseURL: "http://clpit.duckdns.org:64660/api",
   withCredentials: false,
 });
 

@@ -20,6 +20,7 @@ import orderRoutes from "./routes/orderRoutes.js";
 import pagesRoutes from "./routes/pagesRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import newsletterRoutes from "./routes/newsletterRoutes.js";
+import webhookRoutes from "./routes/webhookRoutes.js";
 
 
 
@@ -46,6 +47,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/pages", pagesRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/newsletter", newsletterRoutes);
+app.use("/api/webhook", webhookRoutes);
 
 
 // Error middleware

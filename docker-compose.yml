@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  server:
+    build: ./server
+    container_name: cowboy_server
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./server/.env
+    volumes:
+      - ./server:/app
+

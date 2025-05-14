@@ -28,6 +28,8 @@ const Cart = lazy(() => import("./pages/Cart/Cart"));
 const UserManagement = lazy(() => import("./pages/Admin/UserManagement"));
 const Newsletter = lazy(() => import("./pages/Admin/Newsletter"));
 const AdminDashboard = lazy(() => import("./pages/Admin/AdminDashboard"));
+const SuccessPage = lazy(() => import("./pages/SuccessPage/SuccessPage"));
+const CancelPage = lazy(() => import("./pages/CancelPage/CancelPage"));
 
 const App = () => {
   const { isLoading } = useAuth();
@@ -51,6 +53,10 @@ const App = () => {
           <Route path="/bookstore/book/:id" element={<BookDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+
+          <Route path="/success" element={<SuccessPage />} />
+          <Route path="/cancel" element={<CancelPage />} />
+
           <Route
             path="/orders"
             element={

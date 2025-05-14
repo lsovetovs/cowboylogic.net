@@ -73,5 +73,15 @@
     margin-top: 1rem;
     font-size: 0.95rem;
     color: #ff9999;
-  }
-  
+  }  .google-btn {
+  margin-top: 1rem;
+  padding: 10px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.google-btn:hover {
+  background-color: #357ae8;
+}

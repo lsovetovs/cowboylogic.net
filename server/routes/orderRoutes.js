@@ -10,6 +10,11 @@ router.post("/", orderController.createOrder);
 router.get("/", orderController.getUserOrders); // user: /orders
 router.get("/all", orderController.getAllOrders); // admin only
 router.patch("/:id/status", orderController.updateOrderStatus);
+router.delete("/:id", orderController.deleteOrder);
+
+// ✅ Додано Stripe Checkout endpoint
+router.post("/create-checkout-session", orderController.createCheckoutSession);
+router.post("/confirm-stripe-order", orderController.confirmStripeOrder);
 
 
 export default router;
