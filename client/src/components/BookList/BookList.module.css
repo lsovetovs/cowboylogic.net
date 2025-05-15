@@ -16,4 +16,9 @@
   .actions button:hover {
     background: #555;
   }
+
+  .card img{
+    height: 300px;
+    width: 200px;
+  }
   

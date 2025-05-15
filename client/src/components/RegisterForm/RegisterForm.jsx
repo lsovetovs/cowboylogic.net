@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import styles from "./RegisterForm.module.css";
-import { useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import axios from "../../store/axios";
 
 const RegisterForm = () => {
-  const { register, login } = useAuth(); // login — для Google
+  const { register, login } = useAuth();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({ email: "", password: "" });
@@ -27,29 +27,23 @@ const RegisterForm = () => {
     }
   };
 
-  const googleSignup = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      try {
-        const res = await axios.post("/auth/google", {
-          id_token: tokenResponse.credential || tokenResponse.id_token,
-        });
+  const handleGoogleSignup = async (credentialResponse) => {
+    try {
+      const res = await axios.post("/auth/google", {
+        id_token: credentialResponse.credential,
+      });
 
-        login({
-          token: res.data.token,
-          user: res.data.user,
-        });
+      login({
+        token: res.data.token,
+        user: res.data.user,
+      });
 
-        navigate("/");
-      } catch (err) {
-        console.error("Google signup error", err);
-        setError("Google signup failed");
-      }
-    },
-    onError: () => {
+      navigate("/");
+    } catch (err) {
+      console.error("Google signup error", err);
       setError("Google signup failed");
-    },
-    flow: "implicit",
-  });
+    }
+  };
 
   return (
     <div className={styles["register-form"]}>
@@ -75,13 +69,8 @@ const RegisterForm = () => {
         {error && <p>{error}</p>}
       </form>
 
-      <button
-        type="button"
-        onClick={googleSignup}
-        className={styles["google-btn"]}
-      >
-        Sign up with Google
-      </button>
+      <hr />
+      <GoogleLogin onSuccess={handleGoogleSignup} onError={() => setError("Google signup failed")} />
     </div>
   );
 };
