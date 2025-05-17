@@ -1,7 +1,11 @@
 header {
   padding: 15px 20px;
     }
-  
+  .tagline {
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: white;
+  }
   .logo {
     font-family: var(--font-family-body), sans-serif; 
     font-size: 70px;
