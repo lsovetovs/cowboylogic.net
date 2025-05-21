@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "../../store/axios";
 import { useAuth } from "../../context/AuthContext";
+import styles from "./BookForm.module.css"
 
 const BookForm = () => {
   const { id } = useParams(); // null → створення, значення → редагування
@@ -52,7 +53,7 @@ const BookForm = () => {
   };
 
   return (
-    <div className="book-form">
+    <div className={styles.bookForm}>
       <h2>{id ? "Edit Book" : "Add New Book"}</h2>
       <form onSubmit={handleSubmit}>
         <input type="text" name="title" value={form.title} onChange={handleChange} placeholder="Title" required />

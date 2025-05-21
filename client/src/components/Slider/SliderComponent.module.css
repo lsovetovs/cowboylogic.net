@@ -12,7 +12,6 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-
 }
 
 .image {
@@ -28,35 +27,37 @@
   transform: translateX(-50%);
   background: transparent;
   color: white;
-  padding: 15px 20px;
-  border-radius: 5px;
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--radius-md);
   text-align: center;
-  font-size: 24px;
+  font-size: 1.8rem;
   font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* 🧡 читабельність */
 }
 
-/* Стилізація кастомних стрілок */
+/* Кастомні стрілки */
 .arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 30px;
+  font-size: 1.8rem;
   color: white;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  border-radius: 50%;
+  background: var(--color-overlay);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-full);
   cursor: pointer;
   z-index: 10;
-}
-
-.left {
-  left: 20px;
-}
-
-.right {
-  right: 20px;
+  transition: background 0.2s ease;
 }
 
 .arrow:hover {
   background: rgba(0, 0, 0, 0.8);
+}
+
+.left {
+  left: var(--spacing-lg);
+}
+
+.right {
+  right: var(--spacing-lg);
 }

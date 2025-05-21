@@ -1,37 +1,77 @@
 .newsletter {
-    padding: 1rem;
-    /* background-color: #f5f5dc; */
-    /* border-top: 2px solid #8b5e3c; */
-    margin-top: 2rem;
-    text-align: center;
-  }
-  
-  .inputGroup {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-  }
-  
-  input[type="email"] {
-    padding: 0.5rem;
-    border: 1px solid #8b5e3c;
-    border-radius: 4px;
-    width: 250px;
-  }
-  
-  button {
-    background-color: #8b5e3c;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .status {
-    margin-top: 0.5rem;
-    color: #333;
-    font-size: 0.9rem;
-  }
-  
+  padding: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+  text-align: center;
+  background: transparent;
+}
+
+.newsletter label {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.inputGroup {
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* 👈 тепер input і кнопка однакові по висоті */
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+input[type="email"] {
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-brown);
+  border-radius: var(--radius-md); /* трохи м'якше */
+  width: 250px;
+  font-size: 1rem;
+  background-color: #fefefe;
+  color: var(--color-dark);
+  height: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  outline: none; /* 🧼 прибирає чорну рамку */
+}
+
+input[type="email"]:focus {
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2); /* синій ефект */
+}
+
+input[type="email"]::placeholder {
+  color: #aaa;
+}
+
+
+
+.status {
+  margin-top: var(--spacing-sm);
+  color: var(--color-grey);
+  font-size: 0.9rem;
+}
+.subscribeBtn {
+  font-family: var(--font-family-body);
+  font-size: 1rem;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid white;
+  border-radius: var(--radius-sm);
+  color: white;
+  cursor: pointer;
+  background: transparent;
+  display: inline-block;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.subscribeBtn:hover {
+  background-color: white;
+  color: var(--color-dark);
+}
+
+.subscribeButton {
+  height: 100%; /* 👈 повна висота в inputGroup */
+}

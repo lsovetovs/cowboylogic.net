@@ -1,0 +1,83 @@
+/* BookForm.module.css */
+
+.bookForm {
+  width: 100%;
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  border-radius: 12px;
+  color: #fff8dc;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+  text-align: center;
+  font-family: var(--font-family-body);
+}
+
+.bookForm h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #fff6e6;
+}
+
+.bookForm form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.bookForm input,
+.bookForm textarea {
+  width: 100%;
+  max-width: 600px;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+  font-family: inherit;
+  transition: border 0.3s ease;
+}
+
+.bookForm input:focus,
+.bookForm textarea:focus {
+  outline: none;
+  border: 2px solid #a0522d;
+  transform: scale(1.01);
+}
+
+.bookForm textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.bookForm label {
+  color: #fff8dc;
+  font-size: 1rem;
+}
+
+.bookForm button {
+  background: #8b4513;
+  color: #fff;
+  padding: 0.85rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.bookForm button:hover {
+  background: #a0522d;
+}
+
+.bookForm p {
+  color: #ffaaaa;
+  font-size: 0.9rem;
+}

@@ -13,7 +13,6 @@ const Arrow = ({ className, style, onClick, direction }) => (
     style={{ ...style }}
     onClick={onClick}
   >
-    {/* {direction === "left" ? "◀" : "▶"} */}
   </div>
 );
 

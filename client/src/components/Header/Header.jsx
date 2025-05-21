@@ -22,10 +22,9 @@ const Header = () => {
                 🛒 Cart
               </Link>
               <Link to="/orders" className={styles.authBtn}>
-                📦 My Orders
+                My Orders
               </Link>
 
-              {/* 👋 Вітання та вихід */}
               <span className={styles.userEmail}>Welcome, {user.email}</span>
               <button className={styles.logoutBtn} onClick={logout}>
                 Logout

@@ -43,29 +43,36 @@ const BookList = ({ books = [], onDelete }) => {
     <div className={styles.bookList}>
       {books.map((book) => (
         <div key={book.id} className={styles.card}>
-          <img src={book.imageUrl} alt={book.title} className={styles.image} />
-          <div className={styles.info}>
-            <h3>{book.title}</h3>
-            <p>{book.author}</p>
-            <p>${book.price}</p>
-            <p>{book.inStock ? "In Stock" : "Out of Stock"}</p>
+  <img src={book.imageUrl} alt={book.title} className={styles.image} />
 
-            {/* 🛒 Кнопка "Add to Cart" для всіх авторизованих */}
-            {user && (
-              <button onClick={() => handleAddToCart(book.id)}>
-                Add to Cart
-              </button>
-            )}
-          </div>
+  <div className={styles.info}>
+    {/* Admin buttons top right */}
+    {user?.role === "admin" && (
+      <div className={styles.actions}>
+        <button onClick={() => handleEdit(book.id)}>Edit</button>
+        <button onClick={() => handleDelete(book.id)}>Delete</button>
+      </div>
+    )}
 
-          {/* 🔐 Кнопки тільки для адміна */}
-          {user?.role === "admin" && (
-            <div className={styles.actions}>
-              <button onClick={() => handleEdit(book.id)}>Edit</button>
-              <button onClick={() => handleDelete(book.id)}>Delete</button>
-            </div>
-          )}
-        </div>
+    <div>
+      <h3>{book.title}</h3>
+      <p>{book.author}</p>
+      <p>${book.price}</p>
+      <p>{book.inStock ? "In Stock" : "Out of Stock"}</p>
+    </div>
+
+    {/* Cart button at bottom */}
+    {user && (
+      <button
+        onClick={() => handleAddToCart(book.id)}
+        className={styles.cartButton}
+      >
+        Add to Cart
+      </button>
+    )}
+  </div>
+</div>
+
       ))}
     </div>
   );

@@ -1,4 +1,3 @@
-// components/NewsletterSignup/NewsletterSignup.jsx
 import { useState } from "react";
 import axios from "../../store/axios";
 import styles from "./NewsletterSignup.module.css";
@@ -23,7 +22,7 @@ const NewsletterSignup = () => {
 
   return (
     <div className={styles.newsletter}>
-      <form onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="newsletter">Subscribe to our newsletter:</label>
         <div className={styles.inputGroup}>
           <input
@@ -34,7 +33,9 @@ const NewsletterSignup = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <button type="submit">Subscribe</button>
+<button type="submit" className={styles.subscribeBtn}>
+  Subscribe
+</button>
         </div>
         {status && <p className={styles.status}>{status}</p>}
       </form>

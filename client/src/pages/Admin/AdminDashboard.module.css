@@ -1,0 +1,31 @@
+/* AdminDashboard.module.css */
+.container {
+  padding: var(--spacing-lg);
+  color: white; /* ✅ світлий текст */
+  font-family: var(--font-family-body);
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-md);
+  color: white; /* або можна використати --color-accent, якщо хочеш акцент */
+}
+
+.menu {
+  list-style: disc;
+  padding-left: var(--spacing-lg);
+}
+
+.menu li {
+  margin-bottom: var(--spacing-sm);
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.menu a:hover {
+  color: var(--color-accent); /* синій акцент на ховер */
+}
