@@ -12,6 +12,8 @@
 
 // export default router;
 // server/routes/pagesRoutes.js
+
+
 import express from "express";
 import ctrlWrapper from "../helpers/ctrlWrapper.js";
 import { protect, isAdmin } from "../middleware/authMiddleware.js";
