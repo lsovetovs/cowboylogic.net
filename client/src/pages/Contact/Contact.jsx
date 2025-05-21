@@ -17,7 +17,7 @@ const Contact = () => {
       setLastName("");
       setEmail("");
       setComment("");
-    } catch (err) {
+    } catch  {
       alert("Failed to send message");
     }
   };
