@@ -13,6 +13,7 @@ const User = sequelize.define(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true, // ✅ лише тут
       validate: {
         isEmail: true,
       },
@@ -32,14 +33,8 @@ const User = sequelize.define(
   },
   {
     timestamps: true,
-    indexes: [
-      {
-        unique: true,
-        fields: ["email"], // 👈 додає тільки один індекс
-      },
-    ],
+    // ❌ ВИДАЛЕНО indexes: [] — бо воно дублює
   }
 );
 
-// User.sync(); // ← залишаємо як є, або запускаємо вручну
 export default User;
