@@ -55,6 +55,6 @@ app.use(errorHandler);
 
 // Connect to DB and start server
 connectDB().then(async () => {
-    await sequelize.sync({ alter: true }); // або { force: true } для повного пересоздання
+    await sequelize.sync(); // або { force: true } для повного пересоздання
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   });
