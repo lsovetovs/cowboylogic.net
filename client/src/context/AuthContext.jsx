@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
             headers: { Authorization: `Bearer ${token}` },
           });
           setUser(res.data);
-        } catch (err) {
+        } catch {
           setToken(null);
           localStorage.removeItem("token");
         }

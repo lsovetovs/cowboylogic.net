@@ -7,8 +7,8 @@ import ctrlWrapper from "../helpers/ctrlWrapper.js";
 import { sendOrderConfirmationEmail } from "../services/emailService.js";
 
 // Stripe
-import Stripe from "stripe";
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+// import Stripe from "stripe";
+// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const createOrder = async (req, res) => {
   const userId = req.user.id;
