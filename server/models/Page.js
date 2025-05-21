@@ -13,5 +13,5 @@ const Page = sequelize.define("Page", {
     allowNull: false,
   },
 });
-// Page.sync();
+
 export default Page;
