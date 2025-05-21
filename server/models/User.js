@@ -33,6 +33,7 @@ const User = sequelize.define(
   },
   {
     timestamps: true,
+    indexes: []
     // ❌ ВИДАЛЕНО indexes: [] — бо воно дублює
   }
 );
