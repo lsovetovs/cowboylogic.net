@@ -1,9 +1,10 @@
 import EditablePage from "../../components/EditablePage/EditablePage";
-import styles from "../CLStrategies.module.css";
+
 
 const CowboyCollegeLeadership = () => {
   return (
-    <div className={styles.wrapper}>
+    // <div className={styles.wrapper}>
+    <div>
       <EditablePage pageId="cowboy-college-leadership" title="Cowboy College Leadership" />
     </div>
   );
