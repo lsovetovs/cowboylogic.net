@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import { sequelize } from "./config/db.js";
+import { seedSuperAdmin } from "./seeds/seedSuperAdmin.js";
 
 import "./models/Book.js";
 import "./models/CartItem.js";
@@ -55,6 +56,11 @@ app.use(errorHandler);
 
 // Connect to DB and start server
 connectDB().then(async () => {
-    await sequelize.sync(); // або { force: true } для повного пересоздання
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  });
+  await sequelize.sync(); // без force/alter
+
+  if (process.env.NODE_ENV !== "production") {
+    await seedSuperAdmin();
+  }
+
+  app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+});
