@@ -99,9 +99,9 @@ export const Navbar = () => {
             )}
           </div>
 
-          <NavLink to="/contact" className={buildLinkClass} onClick={handleCloseDropdown}>
+          {/* <NavLink to="/contact" className={buildLinkClass} onClick={handleCloseDropdown}>
             ContactUs
-          </NavLink>
+          </NavLink> */}
           {user && ["admin", "superadmin"].includes(user.role) && (
             <NavLink to="/admin" className={buildLinkClass} onClick={handleCloseDropdown}>
               Admin Dashboard

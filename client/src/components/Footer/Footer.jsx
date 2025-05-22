@@ -54,14 +54,7 @@ export default function Footer() {
       <div className={styles.bottomSection}>
         <p className={styles.footer_content}>
           Copyright © 2025 <Link to="/">Roger Haller</Link>. All Rights
-          Reserved. | Catch Responsive by{" "}
-          <a
-            href="https://catchthemes.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Catch Themes
-          </a>
+          Reserved.
         </p>
       </div>
     </footer>

@@ -56,7 +56,7 @@ app.use(errorHandler);
 
 // Connect to DB and start server
 connectDB().then(async () => {
-  await sequelize.sync(); // без force/alter
+  // await sequelize.sync(); 
 
   if (process.env.NODE_ENV !== "production") {
     await seedSuperAdmin();

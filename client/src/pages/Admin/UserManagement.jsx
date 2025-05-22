@@ -22,18 +22,19 @@ const UserManagement = () => {
     }
   };
 
-  const handleRoleChange = async (id, newRole) => {
-    try {
-      await axios.put(
-        `/users/${id}`,
-        { role: newRole },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      fetchUsers();
-    } catch (err) {
-      alert(err.response?.data?.message || "Update failed");
-    }
-  };
+const handleRoleChange = async (id, newRole) => {
+  try {
+    await axios.patch(
+      `/users/${id}/role`,
+      { role: newRole },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    fetchUsers();
+  } catch (err) {
+    alert(err.response?.data?.message || "Update failed");
+  }
+};
+
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
