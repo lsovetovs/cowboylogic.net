@@ -1,35 +1,74 @@
-.userManagement {
-    padding: 1rem;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-  }
-  
-  th, td {
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f4f4f4;
-  }
-  /* UserManagement.module.css */
 .container {
-  padding: 1rem;
+  max-width: 100%;
+  margin: var(--spacing-xl) auto;
+  padding: var(--spacing-lg);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius-lg);
+  color: white;
+  font-family: var(--font-family-body);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
 }
+
+/* Заголовок */
+.container h2 {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Таблиця */
 .userTable {
   width: 100%;
   border-collapse: collapse;
+  background-color: transparent;
 }
-.userTable th,
+
+.userTable thead {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.userTable th {
+  padding: var(--spacing-sm);
+  text-align: left;
+  font-weight: bold;
+  color: white;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
 .userTable td {
-  padding: 8px;
-  border: 1px solid #ccc;
+  padding: var(--spacing-sm);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
 }
+
+/* Рядки */
+.userTable tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Селект */
 .userTable select {
-  padding: 4px;
+  background-color: #fff;
+  color: var(--color-dark);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-brown);
+  font-family: var(--font-family-body);
+}
+
+/* Кнопка Delete */
+.userTable button {
+  background-color: var(--color-brown);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.7rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.userTable button:hover {
+  background-color: var(--color-light-grey);
+  color: white;
 }

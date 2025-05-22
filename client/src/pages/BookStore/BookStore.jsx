@@ -28,7 +28,7 @@ const BookStore = () => {
 
   return (
     <div className={styles.bookStore}>
-      <h1>CLP BookStore</h1>
+      {/* <h1>CLP BookStore</h1> */}
 
       {/* 🔐 Кнопка "Add Book" тільки для адміна */}
       {user?.role === "admin" && (

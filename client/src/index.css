@@ -12,6 +12,8 @@
   --color-accent: #4285f4;
   --color-brown: #5a2d0c;
   --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-inner-buttons: #8b4513;
+  --color-titles: #ffffff;
 
   /* === Radius === */
   --radius-sm: 4px;

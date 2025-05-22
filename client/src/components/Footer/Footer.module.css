@@ -5,13 +5,6 @@
   margin-top: var(--spacing-xl);
 }
 
-.topSection {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
-}
 
 
 .heading {
@@ -34,13 +27,21 @@
   gap: var(--spacing-sm);
 }
 
+.topSection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* три рівні колонки */
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  align-items: start; /* 🔥 дуже важливо для правильного вирівнювання */
+}
+
 .column {
-  flex: 1 1 200px;
-  min-width: 200px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* 🔥 вирівнюємо все по лівому краю */
+  align-items: flex-start; /* 🔥 вирівнює весь контент по лівому краю */
+  gap: var(--spacing-sm);
 }
+
 
 .navList a,
 .socialList a {

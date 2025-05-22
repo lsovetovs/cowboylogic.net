@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useAuth } from "../../context/AuthContext";
 import axios from "../../store/axios";
+import styles from "./Cart.module.css";
 
 const Cart = () => {
   const { token } = useAuth();
@@ -76,7 +77,7 @@ const Cart = () => {
   );
 
   return (
-    <div className="cart-page">
+    <div className={styles["cart-page"]}>
       <h2>My Cart</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
 
@@ -87,7 +88,8 @@ const Cart = () => {
           <ul>
             {items.map((item) => (
               <li key={item.id}>
-                <strong>{item.Book.title}</strong> — ${item.Book.price} ×{" "}
+                <strong>{item.Book.title}</strong>
+                <span className={styles.price}>— ${item.Book.price}</span>
                 <input
                   type="number"
                   min="1"
@@ -102,7 +104,12 @@ const Cart = () => {
           </ul>
 
           <h3>Total: ${totalPrice.toFixed(2)}</h3>
-          <button onClick={handleStripeCheckout}>Checkout with Stripe</button>
+          <button
+            onClick={handleStripeCheckout}
+            className="btn btn-outline btn-checkout"
+          >
+            Checkout with Stripe
+          </button>
         </>
       )}
     </div>

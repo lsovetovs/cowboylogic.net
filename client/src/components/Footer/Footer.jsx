@@ -8,11 +8,6 @@ export default function Footer() {
     <footer className={styles.container}>
       <div className={styles.topSection}>
         <div className={styles.column}>
-          <h3 className={styles.heading}>Stay Updated</h3>
-          <NewsletterSignup />
-        </div>
-
-        <div className={styles.column}>
           <h3 className={styles.heading}>Navigation</h3>
           <ul className={styles.navList}>
             <li>
@@ -49,6 +44,10 @@ export default function Footer() {
               </a>
             </li>
           </ul>
+        </div>
+        <div className={styles.column}>
+          <h3 className={styles.heading}>Stay Updated</h3>
+          <NewsletterSignup />
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 .container {
-  max-width: 1000px;
+  max-width: 100%;
   margin: 3rem auto;
   padding: 2rem;
   color: white;
@@ -8,7 +8,7 @@
 .title {
   font-size: 2.2rem;
   margin-bottom: 1.5rem;
-  color: #fff8dc;
+  color:var(--color-titles);
   text-align: left;
 }
 
@@ -22,10 +22,11 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   border: 1px solid var(--color-brown);
-  background-color: var(--color-brown); /* світло-коричневий фон */
+ background-color: rgba(0, 0, 0, 0.5); /* світло-коричневий фон */
   padding: 0.5rem;
   border-radius: var(--radius-md);
   margin-bottom: 1rem;
+  backdrop-filter: blur(4px);
 }
 
 .buttonGroup {
@@ -36,7 +37,7 @@
 
 .toolbar button {
   padding: var(--spacing-xs) var(--spacing-sm);
-  background-color: var(--color-brown); /* світло-коричневий фон */
+  background-color: var(--color-inner-buttons); /* світло-коричневий фон */
   border: 1px solid white;
   color: white;
   border-radius: var(--radius-sm);
@@ -93,4 +94,14 @@
   color: #ffcccc;
   font-weight: bold;
   margin-bottom: 1rem;
+}
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.editControls {
+  margin: 0; /* замість відступу вниз */
 }
