@@ -1,5 +1,4 @@
-
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "../../store/axios";
 import { useAuth } from "../../context/AuthContext";
 import styles from "./Orders.module.css";
@@ -9,18 +8,21 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
 
-  const fetchOrders = () => {
+  const fetchOrders = useCallback(() => {
     axios
       .get("/orders", {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => setOrders(res.data))
+      .then((res) => {
+        setOrders(res.data);
+        setError(null);
+      })
       .catch(() => setError("Failed to load orders"));
-  };
+  }, [token]);
 
   useEffect(() => {
     fetchOrders();
-  }, [token]);
+  }, [fetchOrders]);
 
   const handleDeleteOrder = async (orderId) => {
     if (!window.confirm("Are you sure you want to delete this order?")) return;
