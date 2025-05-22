@@ -105,3 +105,18 @@
 .editControls {
   margin: 0; /* замість відступу вниз */
 }
+@media (max-width: 600px) {
+  .titleRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .titleRow h1 {
+    font-size: 1.8rem;
+  }
+
+  .editControls {
+    align-self: flex-end;
+  }
+}

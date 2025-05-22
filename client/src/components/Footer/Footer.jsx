@@ -17,7 +17,7 @@ export default function Footer() {
               <Link to="/about">About</Link>
             </li>
             <li>
-              <Link to="/cowboy-college-consulting">Consulting</Link>
+              <Link to="/clstrategies/cowboy-college-consulting">Consulting</Link>
             </li>
           </ul>
         </div>

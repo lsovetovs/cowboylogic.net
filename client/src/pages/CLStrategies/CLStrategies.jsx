@@ -5,7 +5,7 @@ const CLStrategies = () => {
   return (
     <div className={styles.container}>
       <HeroStrategies />
-      <h1>CLStrategies</h1>
+      {/* <h1>CLStrategies</h1> */}
     </div>
   );
 };      

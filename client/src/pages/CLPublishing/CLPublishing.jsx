@@ -5,7 +5,7 @@ const CLPublishing = () => {
   return (
     <div className={styles.container}>
       <HeroPublishing />
-      <h1>CLPublishing</h1>
+      {/* <h1>CLPublishing</h1> */}
     </div>
   );
 };

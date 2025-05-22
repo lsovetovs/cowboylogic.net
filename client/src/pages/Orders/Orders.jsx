@@ -1,6 +1,8 @@
+
 import { useEffect, useState } from "react";
 import axios from "../../store/axios";
 import { useAuth } from "../../context/AuthContext";
+import styles from "./Orders.module.css";
 
 const Orders = () => {
   const { token, user } = useAuth();
@@ -36,34 +38,28 @@ const Orders = () => {
   };
 
   return (
-    <div className="orders-page">
+    <div className={styles.ordersPage}>
       <h2>My Orders</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
       {orders.length === 0 ? (
         <p>No orders yet.</p>
       ) : (
         orders.map((order) => (
-          <div key={order.id} style={{ marginBottom: "1rem" }}>
+          <div key={order.id} className={styles.orderCard}>
             <h4>Order #{order.id}</h4>
             <p>Status: {order.status}</p>
             <p>Total: ${order.totalPrice.toFixed(2)}</p>
-            <ul>
+            <ul className={styles.orderList}>
               {order.OrderItems.map((item) => (
                 <li key={item.id}>
-                  {item.Book.title} — {item.quantity} pcs @ ${item.price}
+                  <strong>{item.Book.title}</strong> — {item.quantity} pcs @ ${item.price}
                 </li>
               ))}
             </ul>
             {user?.role === "admin" && (
               <button
                 onClick={() => handleDeleteOrder(order.id)}
-                style={{
-                  marginTop: "0.5rem",
-                  backgroundColor: "#ffdddd",
-                  border: "1px solid red",
-                  padding: "0.5rem",
-                  cursor: "pointer",
-                }}
+                className={styles.cancelButton}
               >
                 🗑 Cancel Order
               </button>
