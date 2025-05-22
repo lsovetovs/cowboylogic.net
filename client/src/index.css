@@ -45,12 +45,18 @@
 }
 
 body {
-  background-image: linear-gradient(
-        rgba(46, 47, 66, 0.4),
-        rgba(46, 47, 66, 0.4)
-      ), url(/assets/images/body_bg_cowboy.jpg);
-  background-repeat: round;
+  min-height: 100vh;
+  margin: 0;
   font-family: var(--font-family-body);
+  background-image: linear-gradient(
+      rgba(46, 47, 66, 0.4),
+      rgba(46, 47, 66, 0.4)
+    ),
+    url(/assets/images/body_bg_cowboy.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 a {
@@ -60,8 +66,8 @@ a {
 
 /* === Global Containers === */
 .container {
-  max-width: 1440px; 
-  margin: 0 auto; 
+  /* max-width: 1440px;  */
+
   padding: var(--spacing-lg);
   background-color: var(--color-darker);
 }
@@ -173,4 +179,9 @@ input,
 textarea,
 select {
   font-family: var(--font-family-body);
+}
+
+html {
+  height: 100%;
+  overflow-y: scroll; /* запобігає стрибкам при прокрутці */
 }
