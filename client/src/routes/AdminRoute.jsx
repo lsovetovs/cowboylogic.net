@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { ROLES } from "../../constants/roles";
+import { ROLES } from "../constants/roles";
 
 
 const AdminRoute = ({ children }) => {

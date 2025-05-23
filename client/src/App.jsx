@@ -52,7 +52,7 @@ const CancelPage = lazy(() => import("./pages/CancelPage/CancelPage"));
 // 🔐 Private
 const Orders = lazy(() => import("./pages/Orders/Orders"));
 const Cart = lazy(() => import("./pages/Cart/Cart"));
-const ProfilePage = lazy(() => import("./pages/ProfilePage")); // ✅ новий маршрут
+const ProfilePage = lazy(() => import("./pages/ProfilePage/ProfilePage")); // ✅ новий маршрут
 
 // 🔐 Admin
 const AdminDashboard = lazy(() => import("./pages/Admin/AdminDashboard"));
