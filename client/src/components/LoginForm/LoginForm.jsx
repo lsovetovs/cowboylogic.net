@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import styles from "./LoginForm.module.css";
 import axios from "../../store/axios";
 import { GoogleLogin } from "@react-oauth/google";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const { loginWithToken, login } = useAuth();
@@ -13,8 +13,6 @@ const LoginForm = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [code, setCode] = useState("");
   const [step, setStep] = useState(1); // 1: email+pass, 2: code
-  const [error, setError] = useState(null);
-  const [info, setInfo] = useState(null);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -22,27 +20,28 @@ const LoginForm = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError(null);
-    setInfo(null);
     try {
       await axios.post("/auth/login", form);
       await axios.post("/auth/request-code", { email: form.email });
       setStep(2);
-      setInfo("Verification code sent to your email.");
+      toast.info("Verification code sent to your email.");
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
+      toast.error(err.response?.data?.message || "Login failed");
     }
   };
 
   const handleVerify = async (e) => {
     e.preventDefault();
-    setError(null);
     try {
-      const res = await axios.post("/auth/verify-code", { email: form.email, code });
+      const res = await axios.post("/auth/verify-code", {
+        email: form.email,
+        code,
+      });
       loginWithToken(res.data);
+      toast.success("Welcome back!");
       navigate("/");
     } catch (err) {
-      setError(err.response?.data?.message || "Invalid or expired code");
+      toast.error(err.response?.data?.message || "Invalid or expired code");
     }
   };
 
@@ -57,10 +56,11 @@ const LoginForm = () => {
         user: res.data.user,
       });
 
+      toast.success("Logged in with Google!");
       navigate("/");
     } catch (err) {
       console.error("Google login error", err);
-      setError("Google login failed");
+      toast.error("Google login failed");
     }
   };
 
@@ -102,10 +102,10 @@ const LoginForm = () => {
       )}
 
       <hr />
-      <GoogleLogin onSuccess={handleGoogleLogin} onError={() => setError("Google login failed")} />
-
-      {error && <p className={styles.error}>{error}</p>}
-      {info && <p className={styles.info}>{info}</p>}
+      <GoogleLogin
+        onSuccess={handleGoogleLogin}
+        onError={() => toast.error("Google login failed")}
+      />
     </div>
   );
 };

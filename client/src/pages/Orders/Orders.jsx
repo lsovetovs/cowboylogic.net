@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import useFetch from "../../hooks/useFetch";
 import { apiService } from "../../services/axiosService";
+import { toast } from "react-toastify";
 import styles from "./Orders.module.css";
 
 const Orders = () => {
@@ -20,8 +21,9 @@ const Orders = () => {
     try {
       await apiService.delete(`/orders/${orderId}`, true);
       setOrders((prev) => prev.filter((o) => o.id !== orderId));
+      toast.success("Order deleted successfully");
     } catch (err) {
-      alert("Failed to delete order");
+      toast.error("Failed to delete order");
       console.error(err);
     }
   };

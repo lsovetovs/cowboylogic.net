@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-
 import { ROLES } from "../../constants/roles";
 import { apiService } from "../../services/axiosService";
+import { toast } from "react-toastify";
 import styles from "./UserManagement.module.css";
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
-
 
   useEffect(() => {
     fetchUsers();
@@ -18,6 +17,7 @@ const UserManagement = () => {
       setUsers(res.data);
     } catch (err) {
       console.error("Failed to fetch users", err);
+      toast.error("Failed to fetch users");
     }
   };
 
@@ -25,8 +25,9 @@ const UserManagement = () => {
     try {
       await apiService.patch(`/users/${id}/role`, { role: newRole }, true);
       fetchUsers();
+      toast.success("User role updated");
     } catch (err) {
-      alert(err.response?.data?.message || "Update failed");
+      toast.error(err.response?.data?.message || "Update failed");
     }
   };
 
@@ -35,8 +36,9 @@ const UserManagement = () => {
     try {
       await apiService.delete(`/users/${id}`, true);
       fetchUsers();
+      toast.success("User deleted");
     } catch (err) {
-      alert(err.response?.data?.message || "Delete failed");
+      toast.error(err.response?.data?.message || "Delete failed");
     }
   };
 

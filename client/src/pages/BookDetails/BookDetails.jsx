@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import useFetch from "../../hooks/useFetch";
 import { apiService } from "../../services/axiosService";
+import { toast } from "react-toastify";
 import styles from "./BookDetails.module.css";
 
 const BookDetails = () => {
@@ -16,10 +17,10 @@ const BookDetails = () => {
         { bookId: book.id, quantity: 1 },
         true
       );
-      alert("Book added to cart!");
+      toast.success("Book added to cart!");
     } catch (err) {
       console.error("Add to cart failed", err);
-      alert("Error adding book to cart");
+      toast.error("Error adding book to cart");
     }
   };
 

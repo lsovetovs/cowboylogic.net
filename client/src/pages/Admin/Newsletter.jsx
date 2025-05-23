@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { apiService } from "../../services/axiosService";
+import { toast } from "react-toastify";
 import styles from "./Newsletter.module.css";
 
 const Newsletter = () => {
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
-  const [message, setMessage] = useState(null);
   const { user } = useAuth();
   console.log("Current user:", user);
 
@@ -14,16 +14,15 @@ const Newsletter = () => {
     e.preventDefault();
     try {
       await apiService.post("/newsletter/send", { subject, content }, true);
-      setMessage("Newsletter sent successfully");
+      toast.success("✅ Newsletter sent successfully");
     } catch (err) {
-      setMessage(err.response?.data?.message || "Sending failed");
+      toast.error(err.response?.data?.message || "❌ Sending failed");
     }
   };
 
   return (
     <div className={styles.container}>
       <h2>Send Newsletter</h2>
-      {message && <p>{message}</p>}
       <form onSubmit={handleSubmit} className={styles.form}>
         <label>
           Subject:

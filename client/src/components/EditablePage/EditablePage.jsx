@@ -4,6 +4,7 @@ import { apiService } from "../../services/axiosService";
 import styles from "./EditablePage.module.css";
 import DOMPurify from "dompurify";
 import { ROLES } from "../../constants/roles";
+import { toast } from "react-toastify";
 
 const EditablePage = ({ slug, title }) => {
   const { user } = useAuth();
@@ -19,7 +20,10 @@ const EditablePage = ({ slug, title }) => {
         setContent(res.data.content);
         setError(null);
       })
-      .catch(() => setError("⚠️ Failed to load content"));
+      .catch(() => {
+        setError("⚠️ Failed to load content");
+        toast.error("Failed to load content");
+      });
   }, [slug]);
 
   const execCmd = (command, value = null) => {
@@ -31,8 +35,9 @@ const EditablePage = ({ slug, title }) => {
       const cleanContent = DOMPurify.sanitize(content);
       await apiService.put(`/pages/${slug}`, { content: cleanContent }, true);
       setIsEditing(false);
+      toast.success("Page content saved successfully!");
     } catch {
-      setError("Failed to save changes.");
+      toast.error("Failed to save changes.");
     }
   };
 

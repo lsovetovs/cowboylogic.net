@@ -1,6 +1,9 @@
+// 📦 RegisterForm.jsx — оновлений з toast
+
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import styles from "./RegisterForm.module.css";
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "../../store/axios";
@@ -10,7 +13,6 @@ const RegisterForm = () => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({ email: "", password: "" });
-  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -18,12 +20,12 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
     try {
       await register(form);
+      toast.success("Account created successfully!");
       navigate("/");
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed");
+      toast.error(err.response?.data?.message || "Registration failed");
     }
   };
 
@@ -38,10 +40,11 @@ const RegisterForm = () => {
         user: res.data.user,
       });
 
+      toast.success("Logged in with Google!");
       navigate("/");
     } catch (err) {
       console.error("Google signup error", err);
-      setError("Google signup failed");
+      toast.error("Google signup failed");
     }
   };
 
@@ -49,28 +52,13 @@ const RegisterForm = () => {
     <div className={styles["register-form"]}>
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          required
-        />
+        <input type="email" name="email" value={form.email} onChange={handleChange} required />
+        <input type="password" name="password" value={form.password} onChange={handleChange} required />
         <button type="submit">Register</button>
-        {error && <p>{error}</p>}
       </form>
 
       <hr />
-      <GoogleLogin onSuccess={handleGoogleSignup} onError={() => setError("Google signup failed")} />
+      <GoogleLogin onSuccess={handleGoogleSignup} onError={() => toast.error("Google signup failed")} />
     </div>
   );
 };
