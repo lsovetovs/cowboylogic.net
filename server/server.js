@@ -5,11 +5,14 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import { sequelize } from "./config/db.js";
 import { seedSuperAdmin } from "./seeds/seedSuperAdmin.js";
+import helmet from "helmet";
 
 import "./models/Book.js";
 import "./models/CartItem.js";
 import "./models/Order.js";
 import "./models/OrderItem.js";
+import "./models/LoginCode.js";
+
 
 
 
@@ -38,6 +41,7 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("dev"));
+app.use(helmet());
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -56,7 +60,7 @@ app.use(errorHandler);
 
 // Connect to DB and start server
 connectDB().then(async () => {
-  // await sequelize.sync(); 
+  await sequelize.sync(); 
 
   if (process.env.NODE_ENV !== "production") {
     await seedSuperAdmin();

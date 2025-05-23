@@ -1,4 +1,3 @@
-// server/middleware/authMiddleware.js
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import HttpError from "../helpers/HttpError.js";
@@ -16,19 +15,23 @@ export const protect = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findByPk(decoded.id);
 
-    if (!user) {
-      return res.status(401).json({ message: "User not found" });
+    if (!user) return res.status(401).json({ message: "User not found" });
+
+    // ✅ Перевіряємо відповідність tokenVersion
+    if (decoded.tokenVersion !== user.tokenVersion) {
+      return res.status(401).json({ message: "Token has been invalidated" });
     }
 
     req.user = {
       id: user.id,
       email: user.email,
       role: user.role,
-      isSuperAdmin: user.isSuperAdmin, // ✅ додано
+      isSuperAdmin: user.isSuperAdmin,
     };
 
-    console.log(`[AUTH] User ${user.email} with role ${user.role} accessed ${req.method} ${req.originalUrl}`);
-
+    console.log(
+      `[AUTH] User ${user.email} with role ${user.role} accessed ${req.method} ${req.originalUrl}`
+    );
 
     next();
   } catch (error) {

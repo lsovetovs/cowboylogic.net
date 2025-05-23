@@ -10,6 +10,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// 📩 Відправка повідомлення з контакт-форми
 export const sendContactEmail = async ({ firstName, lastName, email, comment }) => {
   const mailOptions = {
     from: `"${firstName} ${lastName}" <${email}>`,
@@ -25,7 +26,7 @@ export const sendContactEmail = async ({ firstName, lastName, email, comment }) 
   await transporter.sendMail(mailOptions);
 };
 
-// ✅ НОВА ФУНКЦІЯ
+// 🧾 Підтвердження замовлення
 export const sendOrderConfirmationEmail = async ({ to, order, items }) => {
   const itemList = items
     .map(item => `<li>${item.quantity} × ${item.Book.title} @ $${item.Book.price}</li>`)
@@ -42,6 +43,18 @@ export const sendOrderConfirmationEmail = async ({ to, order, items }) => {
       <ul>${itemList}</ul>
       <p><strong>Total:</strong> $${order.totalPrice}</p>
     `,
+  };
+
+  await transporter.sendMail(mailOptions);
+};
+
+// ✅ Універсальна функція надсилання листів
+export const sendEmail = async (to, subject, html) => {
+  const mailOptions = {
+    from: `"${process.env.MAIL_FROM_NAME}" <${process.env.MAIL_FROM_EMAIL}>`,
+    to,
+    subject,
+    html,
   };
 
   await transporter.sendMail(mailOptions);

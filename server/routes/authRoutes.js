@@ -8,6 +8,9 @@ import {
 import { protect } from "../middleware/authMiddleware.js";
 import { googleAuth } from "../controllers/googleAuthController.js";
 import { authLimiter } from "../middleware/authLimiter.js";
+import verifyCodeController from "../controllers/verifyCodeController.js";
+import codeController from "../controllers/requestCodeController.js"; 
+
 
 
 const router = express.Router();
@@ -28,6 +31,8 @@ router.post(
 router.post("/logout", authController.logoutUser);
 router.get("/me", protect, authController.getCurrentUser);
 router.post("/google", googleAuth);
+router.post("/request-code", codeController.requestLoginCode);
+router.post("/verify-code", verifyCodeController.verifyLoginCode);
 
 
 
