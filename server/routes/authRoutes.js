@@ -7,6 +7,7 @@ import {
 } from "../schemas/authSchema.js";
 import { protect } from "../middleware/authMiddleware.js";
 import { googleAuth } from "../controllers/googleAuthController.js";
+import { authLimiter } from "../middleware/authLimiter.js";
 
 
 const router = express.Router();
@@ -19,6 +20,7 @@ router.post(
 
 router.post(
   "/login",
+    authLimiter,
   validateBody(authLoginSchema),
   authController.loginUser
 );
@@ -26,6 +28,7 @@ router.post(
 router.post("/logout", authController.logoutUser);
 router.get("/me", protect, authController.getCurrentUser);
 router.post("/google", googleAuth);
+
 
 
 export default router;

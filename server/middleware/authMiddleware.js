@@ -27,6 +27,9 @@ export const protect = async (req, res, next) => {
       isSuperAdmin: user.isSuperAdmin, // ✅ додано
     };
 
+    console.log(`[AUTH] User ${user.email} with role ${user.role} accessed ${req.method} ${req.originalUrl}`);
+
+
     next();
   } catch (error) {
     res.status(401).json({ message: "Invalid token" });

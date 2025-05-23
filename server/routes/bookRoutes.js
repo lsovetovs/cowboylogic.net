@@ -9,6 +9,7 @@ import {
 } from "../schemas/bookSchema.js";
 
 import { validateBody } from "../middleware/validateBody.js";
+import { requireRole } from "../middleware/requireRole.js";
 
 const router = express.Router();
 const {
@@ -26,10 +27,11 @@ router.delete("/:id", protect, isAdmin, deleteBook); // видалення
 router.post(
   "/",
   protect,
-  isAdmin,
+  requireRole(["admin", "superadmin"]),
   validateBody(createBookSchema),
   createBook
 );
+
 
 router.put(
   "/:id",
@@ -38,5 +40,7 @@ router.put(
   validateBody(updateBookSchema),
   updateBook
 );
+
+
 
 export default router;

@@ -1,19 +1,3 @@
-// // server/routes/pagesRoutes.js
-// import express from "express";
-// import { getPage, createPage, updatePage } from "../controllers/pagesController.js";
-// import ctrlWrapper from "../helpers/ctrlWrapper.js";
-// import { protect, isAdmin } from "../middleware/authMiddleware.js";
-
-// const router = express.Router();
-
-// router.get("/:slug", ctrlWrapper(getPage));
-// router.post("/", protect, isAdmin, ctrlWrapper(createPage));
-// router.put("/:slug", protect, isAdmin, ctrlWrapper(updatePage));
-
-// export default router;
-// server/routes/pagesRoutes.js
-
-
 import express from "express";
 import ctrlWrapper from "../helpers/ctrlWrapper.js";
 import { protect, isAdmin } from "../middleware/authMiddleware.js";

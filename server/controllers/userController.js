@@ -1,14 +1,20 @@
 import User from "../models/User.js";
 import HttpError from "../helpers/HttpError.js";
 import ctrlWrapper from "../helpers/ctrlWrapper.js";
+import { logSuperAdminAction } from "../utils/logger.js";
 
 const updateUserRole = async (req, res) => {
   const { id } = req.params;
   const { role } = req.body;
 
   const user = await User.findByPk(id);
+
   if (!user) {
     throw HttpError(404, "User not found");
+  }
+
+  if (req.user.isSuperAdmin) {
+    logSuperAdminAction(req.user.email, `Changed role to ${role}`, user.email);
   }
 
   if (user.isSuperAdmin) {
