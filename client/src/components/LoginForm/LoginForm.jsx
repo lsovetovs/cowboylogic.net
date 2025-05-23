@@ -12,7 +12,7 @@ const LoginForm = () => {
 
   const [form, setForm] = useState({ email: "", password: "" });
   const [code, setCode] = useState("");
-  const [step, setStep] = useState(1); // 1: email+pass, 2: code
+  const [step, setStep] = useState(1); 
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -101,14 +101,14 @@ const LoginForm = () => {
         </form>
       )}
 
-      <hr />
-      <GoogleLogin
-        onSuccess={handleGoogleLogin}
-        onError={() => toast.error("Google login failed")}
-      />
+      <div className={styles["google-login"]}>
+        <GoogleLogin
+          onSuccess={handleGoogleLogin}
+          onError={() => toast.error("Google login failed")}
+        />
+      </div>
     </div>
   );
 };
 
 export default LoginForm;
-

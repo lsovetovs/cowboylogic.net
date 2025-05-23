@@ -1,0 +1,39 @@
+.profilePage {
+  max-width: 100%;
+  margin: 6rem auto;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  font-family: var(--font-family-body);
+  color: #fff6e6;
+}
+
+.profilePage h1 {
+  font-size: 2rem;
+  color: var(--color-titles);
+  font-family: var(--font-family-body);
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.profilePage h2 {
+  font-size: 1.3rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-family-body);
+  color: var(--color-titles);
+  text-align: left;
+}
+
+.profilePage p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #fff6e6;
+  text-align: left;
+}
+
+.profilePage strong {
+  color: var(--color-titles);
+  font-weight: bold;
+}

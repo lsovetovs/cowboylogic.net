@@ -49,16 +49,34 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className={styles["register-form"]}>
+    <div className={styles.container}>
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <input type="email" name="email" value={form.email} onChange={handleChange} required />
-        <input type="password" name="password" value={form.password} onChange={handleChange} required />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={handleChange}
+          required
+        />
         <button type="submit">Register</button>
       </form>
 
-      <hr />
-      <GoogleLogin onSuccess={handleGoogleSignup} onError={() => toast.error("Google signup failed")} />
+      <div className={styles["google-signup"]}>
+        <GoogleLogin
+          onSuccess={handleGoogleSignup}
+          onError={() => toast.error("Google signup failed")}
+        />
+      </div>
     </div>
   );
 };
