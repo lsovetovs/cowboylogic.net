@@ -1,6 +1,6 @@
 
 import { useAuth } from "../context/AuthContext";
-import ResetPasswordForm from "../components/ResetPasswordForm/ResetPasswordForm";
+import ResetPasswordForm from "../../components/ResetPasswordForm/ResetPasswordForm";
 
 const ProfilePage = () => {
   const { user } = useAuth();
