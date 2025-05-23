@@ -1,0 +1,16 @@
+{
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "continue": "Continue",
+    "codeSent": "Verification code sent to your email.",
+    "loginFailed": "Login failed",
+    "codePlaceholder": "Enter verification code",
+    "verify": "Verify",
+    "codeInvalid": "Invalid or expired code",
+    "googleSuccess": "Logged in with Google!",
+    "googleFailed": "Google login failed",
+    "welcomeBack": "Welcome back!"
+  }
+}

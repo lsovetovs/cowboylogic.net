@@ -1,15 +1,16 @@
 import { useState } from "react";
+import styles from "./EditableToolbar.module.css";
+import DOMPurify from "dompurify";
+import ImageInsertModal from "../ImageInsertModal/ImageInsertModal";
 import {
   Bold, Italic, Underline, Strikethrough,
   AlignLeft, AlignCenter, AlignRight,
   List, ListOrdered, Link, Image, Minus, Eraser
 } from "lucide-react";
-import styles from "./EditableToolbar.module.css";
-import ImageInsertModal from "../ImageInsertModal/ImageInsertModal";
-import DOMPurify from "dompurify";
 
 const EditableToolbar = ({ execCmd, editorRef }) => {
   const [showImageModal, setShowImageModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const handleImageInsert = (url) => {
     execCmd("insertImage", url);
@@ -26,22 +27,30 @@ const EditableToolbar = ({ execCmd, editorRef }) => {
     const plainText = editorRef.current.textContent || "";
     const sanitized = DOMPurify.sanitize(`<p>${plainText}</p>`);
     editorRef.current.innerHTML = sanitized;
+    setShowConfirmModal(false);
   };
+
+  const ButtonWithTooltip = ({ title, onClick, children }) => (
+    <div className={styles.tooltipWrapper}>
+      <button onClick={onClick}>{children}</button>
+      <span className={styles.tooltip}>{title}</span>
+    </div>
+  );
 
   return (
     <>
       <div className={styles.toolbarContainer}>
         <div className={styles.group}>
-          <button onClick={() => execCmd("bold")} title="Bold"><Bold className={styles.toolbarIcon} /></button>
-          <button onClick={() => execCmd("italic")} title="Italic"><Italic className={styles.toolbarIcon} /></button>
-          <button onClick={() => execCmd("underline")} title="Underline"><Underline className={styles.toolbarIcon} /></button>
-          <button onClick={() => execCmd("strikeThrough")} title="Strikethrough"><Strikethrough className={styles.toolbarIcon} /></button>
+          <ButtonWithTooltip title="Bold" onClick={() => execCmd("bold")}><Bold className={styles.toolbarIcon} /></ButtonWithTooltip>
+          <ButtonWithTooltip title="Italic" onClick={() => execCmd("italic")}><Italic className={styles.toolbarIcon} /></ButtonWithTooltip>
+          <ButtonWithTooltip title="Underline" onClick={() => execCmd("underline")}><Underline className={styles.toolbarIcon} /></ButtonWithTooltip>
+          <ButtonWithTooltip title="Strikethrough" onClick={() => execCmd("strikeThrough")}><Strikethrough className={styles.toolbarIcon} /></ButtonWithTooltip>
         </div>
 
         <div className={styles.group}>
-          <button onClick={() => execCmd("justifyLeft")} title="Align Left"><AlignLeft className={styles.toolbarIcon} /></button>
-          <button onClick={() => execCmd("justifyCenter")} title="Align Center"><AlignCenter className={styles.toolbarIcon} /></button>
-          <button onClick={() => execCmd("justifyRight")} title="Align Right"><AlignRight className={styles.toolbarIcon} /></button>
+          <ButtonWithTooltip title="Align Left" onClick={() => execCmd("justifyLeft")}><AlignLeft className={styles.toolbarIcon} /></ButtonWithTooltip>
+          <ButtonWithTooltip title="Align Center" onClick={() => execCmd("justifyCenter")}><AlignCenter className={styles.toolbarIcon} /></ButtonWithTooltip>
+          <ButtonWithTooltip title="Align Right" onClick={() => execCmd("justifyRight")}><AlignRight className={styles.toolbarIcon} /></ButtonWithTooltip>
         </div>
 
         <div className={styles.group}>
@@ -55,23 +64,23 @@ const EditableToolbar = ({ execCmd, editorRef }) => {
         </div>
 
         <div className={styles.group}>
-          <button onClick={() => execCmd("insertUnorderedList")} title="Bullet List"><List className={styles.toolbarIcon} /></button>
-          <button onClick={() => execCmd("insertOrderedList")} title="Numbered List"><ListOrdered className={styles.toolbarIcon} /></button>
+          <ButtonWithTooltip title="Bullet List" onClick={() => execCmd("insertUnorderedList")}><List className={styles.toolbarIcon} /></ButtonWithTooltip>
+          <ButtonWithTooltip title="Numbered List" onClick={() => execCmd("insertOrderedList")}><ListOrdered className={styles.toolbarIcon} /></ButtonWithTooltip>
         </div>
 
         <div className={styles.group}>
-          <button onClick={() => {
+          <ButtonWithTooltip title="Insert Link" onClick={() => {
             const url = prompt("Enter URL:");
             if (url) execCmd("createLink", url);
-          }} title="Insert Link"><Link className={styles.toolbarIcon} /></button>
+          }}><Link className={styles.toolbarIcon} /></ButtonWithTooltip>
 
-          <button onClick={() => setShowImageModal(true)} title="Insert Image"><Image className={styles.toolbarIcon} /></button>
-          <button onClick={() => execCmd("insertHorizontalRule")} title="Insert Line"><Minus className={styles.toolbarIcon} /></button>
+          <ButtonWithTooltip title="Insert Image" onClick={() => setShowImageModal(true)}><Image className={styles.toolbarIcon} /></ButtonWithTooltip>
+          <ButtonWithTooltip title="Insert Line" onClick={() => execCmd("insertHorizontalRule")}><Minus className={styles.toolbarIcon} /></ButtonWithTooltip>
         </div>
 
         <div className={styles.group}>
-          <button onClick={handleClearFormatting} title="Clear Formatting"><Eraser className={styles.toolbarIcon} /></button>
-          <button onClick={handleClearAll} title="Clear All">🧹</button>
+          <ButtonWithTooltip title="Clear Formatting" onClick={handleClearFormatting}><Eraser className={styles.toolbarIcon} /></ButtonWithTooltip>
+          <ButtonWithTooltip title="Clear All" onClick={() => setShowConfirmModal(true)}>🧹</ButtonWithTooltip>
         </div>
       </div>
 
@@ -80,6 +89,18 @@ const EditableToolbar = ({ execCmd, editorRef }) => {
           onInsert={handleImageInsert}
           onClose={() => setShowImageModal(false)}
         />
+      )}
+
+      {showConfirmModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <p>Are you sure you want to clear all content?</p>
+            <div className="modal-actions">
+              <button className="btn btn-outline" onClick={handleClearAll}>Yes, clear</button>
+              <button className="btn btn-outline" onClick={() => setShowConfirmModal(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );

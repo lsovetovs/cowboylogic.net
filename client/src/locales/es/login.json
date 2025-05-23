@@ -1,0 +1,16 @@
+{
+  "login": {
+    "title": "Iniciar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "continue": "Continuar",
+    "codePlaceholder": "Ingresa el código de verificación",
+    "verify": "Verificar",
+    "codeSent": "Código de verificación enviado a tu correo.",
+    "loginFailed": "Error al iniciar sesión",
+    "codeInvalid": "Código inválido o expirado",
+    "welcomeBack": "¡Bienvenido de nuevo!",
+    "googleFailed": "Error al iniciar sesión con Google",
+    "googleSuccess": "¡Sesión iniciada con Google!"
+  }
+}

@@ -67,3 +67,25 @@
   opacity: 0.9;
   color: white;
 }
+.langSwitcher {
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.langSwitcher button {
+  background-color: transparent;
+  border: 1px solid var(--color-brown);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.langSwitcher button:hover {
+  background-color: var(--color-brown);
+  color: white;
+}
