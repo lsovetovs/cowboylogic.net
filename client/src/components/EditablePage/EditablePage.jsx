@@ -5,6 +5,7 @@ import styles from "./EditablePage.module.css";
 import DOMPurify from "dompurify";
 import { ROLES } from "../../constants/roles";
 import { toast } from "react-toastify";
+import EditableToolbar from "../../components/EditableToolbar/EditableToolbar";
 
 const EditablePage = ({ slug, title }) => {
   const { user } = useAuth();
@@ -32,8 +33,9 @@ const EditablePage = ({ slug, title }) => {
 
   const handleSave = async () => {
     try {
-      const cleanContent = DOMPurify.sanitize(content);
+      const cleanContent = DOMPurify.sanitize(editorRef.current.innerHTML);
       await apiService.put(`/pages/${slug}`, { content: cleanContent }, true);
+      setContent(cleanContent);
       setIsEditing(false);
       toast.success("Page content saved successfully!");
     } catch {
@@ -59,42 +61,11 @@ const EditablePage = ({ slug, title }) => {
 
       {error && <p className={styles.error}>{error}</p>}
 
-      {isEditing && (
-        <div className={styles.toolbar}>
-          <div className={styles.buttonGroup}>
-            <button onClick={() => execCmd("bold")}>B</button>
-            <button onClick={() => execCmd("italic")}>I</button>
-            <button onClick={() => execCmd("underline")}>U</button>
-          </div>
-
-          <div className={styles.buttonGroup}>
-            <button onClick={() => execCmd("justifyLeft")}>Left</button>
-            <button onClick={() => execCmd("justifyCenter")}>Center</button>
-            <button onClick={() => execCmd("justifyRight")}>Right</button>
-          </div>
-
-          <div className={styles.buttonGroup}>
-            <button onClick={() => execCmd("insertUnorderedList")}>• List</button>
-            <button onClick={() => execCmd("insertOrderedList")}>1. List</button>
-          </div>
-
-          <div className={styles.buttonGroup}>
-            <button onClick={() => execCmd("removeFormat")}>Clear</button>
-          </div>
-
-          <div className={styles.buttonGroup}>
-            <button onClick={() => execCmd("insertImage", prompt("Image URL:"))}>
-              🖼️ Image
-            </button>
-          </div>
-        </div>
-      )}
+      {isEditing && <EditableToolbar execCmd={execCmd} editorRef={editorRef} />}
 
       <div
         ref={editorRef}
-        className={`${styles.editable} ${
-          isEditing ? styles.editingArea : styles.staticView
-        }`}
+        className={`${styles.editable} ${isEditing ? styles.editingArea : styles.staticView}`}
         contentEditable={isEditing}
         suppressContentEditableWarning
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}

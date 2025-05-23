@@ -1,0 +1,64 @@
+/* components/ImageInsertModal/ImageInsertModal.module.css */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--color-brown);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  width: 90%;
+  max-width: 420px;
+  color: var(--color-text-dark);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modal h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--color-titles);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal input[type="text"],
+.modal input[type="file"] {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-brown);
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.preview {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  border: 1px solid var(--color-brown);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

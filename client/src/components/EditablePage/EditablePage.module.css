@@ -1,14 +1,14 @@
 .container {
   max-width: 100%;
   margin: 3rem auto;
-  padding: 2rem;
+
   color: white;
 }
 
 .title {
   font-size: 2.2rem;
   margin-bottom: 1.5rem;
-  color:var(--color-titles);
+  color: var(--color-titles);
   text-align: left;
 }
 
@@ -17,42 +17,6 @@
   text-align: right;
 }
 
-.toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  border: 1px solid var(--color-brown);
- background-color: rgba(0, 0, 0, 0.5); /* світло-коричневий фон */
-  padding: 0.5rem;
-  border-radius: var(--radius-md);
-  margin-bottom: 1rem;
-  backdrop-filter: blur(4px);
-}
-
-.buttonGroup {
-  display: flex;
-  gap: 0.4rem;
-  
-}
-
-.toolbar button {
-  padding: var(--spacing-xs) var(--spacing-sm);
-  background-color: var(--color-inner-buttons); /* світло-коричневий фон */
-  border: 1px solid white;
-  color: white;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: 0.2s;
-}
-
-.toolbar button:hover {
-  background-color: #a0522d; /* темніший коричневий на ховер */
-  color: white;
-}
-
-
-/* Загальна структура */
 .editable {
   font-size: 1rem;
   line-height: 1.6;
@@ -60,7 +24,6 @@
   width: 100%;
 }
 
-/* Під час редагування — біле поле, рамка, паддінг */
 .editingArea {
   background: #ffffff;
   color: #222;
@@ -68,17 +31,19 @@
   border-radius: var(--radius-md);
   padding: 1rem;
   min-height: 300px;
+  width: 100%; /* Додаємо, якщо немає */
+  box-sizing: border-box; /* Гарантує, що padding не збільшить ширину */
 }
 
-/* Після збереження — лише текст, без рамки */
 .staticView {
   background: transparent;
   color: white;
-  padding: 0;         /* 💡 без паддінгу */
-  border: none;       /* 💡 без бордеру */
-  min-height: auto;   /* 💡 без фіксованої висоти */
+  padding: 0;
+  border: none;
+  min-height: auto;
+  width: 100%;
+  box-sizing: border-box;
 }
-
 
 .editable:focus {
   outline: none;
@@ -95,6 +60,7 @@
   font-weight: bold;
   margin-bottom: 1rem;
 }
+
 .titleRow {
   display: flex;
   justify-content: space-between;
@@ -103,8 +69,9 @@
 }
 
 .editControls {
-  margin: 0; /* замість відступу вниз */
+  margin: 0;
 }
+
 @media (max-width: 600px) {
   .titleRow {
     flex-direction: column;
