@@ -1,38 +1,25 @@
-import { useEffect, useState, useCallback } from "react";
-import axios from "../../store/axios";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import useFetch from "../../hooks/useFetch";
+import { apiService } from "../../services/axiosService";
 import styles from "./Orders.module.css";
 
 const Orders = () => {
-  const { token, user } = useAuth();
+  const { user } = useAuth();
+  const { data: ordersData, loading, error } = useFetch("/orders", true);
   const [orders, setOrders] = useState([]);
-  const [error, setError] = useState(null);
 
-  const fetchOrders = useCallback(() => {
-    axios
-      .get("/orders", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setOrders(res.data);
-        setError(null);
-      })
-      .catch(() => setError("Failed to load orders"));
-  }, [token]);
-
+  // Синхронізація локального стану після fetch
   useEffect(() => {
-    fetchOrders();
-  }, [fetchOrders]);
+    if (ordersData) setOrders(ordersData);
+  }, [ordersData]);
 
   const handleDeleteOrder = async (orderId) => {
     if (!window.confirm("Are you sure you want to delete this order?")) return;
 
     try {
-      await axios.delete(`/orders/${orderId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      alert("Order deleted");
-      fetchOrders();
+      await apiService.delete(`/orders/${orderId}`, true);
+      setOrders((prev) => prev.filter((o) => o.id !== orderId));
     } catch (err) {
       alert("Failed to delete order");
       console.error(err);
@@ -43,7 +30,9 @@ const Orders = () => {
     <div className={styles.ordersPage}>
       <h2>My Orders</h2>
       {error && <p className={styles.error}>{error}</p>}
-      {orders.length === 0 ? (
+      {loading ? (
+        <p>Loading...</p>
+      ) : orders.length === 0 ? (
         <p>No orders yet.</p>
       ) : (
         orders.map((order) => (
