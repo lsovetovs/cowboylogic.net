@@ -28,10 +28,10 @@ const User = sequelize.define(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    tokenVersion: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
+    // tokenVersion: {
+    //   type: DataTypes.INTEGER,
+    //   defaultValue: 0,
+    // },
   },
   {
     timestamps: true,

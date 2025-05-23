@@ -1,4 +1,4 @@
-import { LoginCode } from "../models/LoginCode.js";
+import LoginCode from "../models/LoginCode.js";
 import User from "../models/User.js";
 import HttpError from "../helpers/HttpError.js";
 import ctrlWrapper from "../helpers/ctrlWrapper.js";

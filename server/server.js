@@ -60,11 +60,16 @@ app.use(errorHandler);
 
 // Connect to DB and start server
 connectDB().then(async () => {
-  await sequelize.sync(); 
+  await sequelize.sync();
 
   if (process.env.NODE_ENV !== "production") {
-    await seedSuperAdmin();
+    try {
+      await seedSuperAdmin();
+    } catch (error) {
+      console.warn("⚠️ Super admin seed skipped (probably missing column):", error.message);
+    }
   }
 
   app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 });
+
