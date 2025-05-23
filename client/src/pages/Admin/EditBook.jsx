@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { apiService } from "../services/axiosService";
+import { apiService } from "../../services/axiosService";
 
 const EditBook = () => {
   const { id } = useParams();
