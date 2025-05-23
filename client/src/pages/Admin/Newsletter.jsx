@@ -1,26 +1,19 @@
-// client/src/pages/Admin/Newsletter.jsx
 import { useState } from "react";
-import axios from "../../store/axios";
 import { useAuth } from "../../context/AuthContext";
+import { apiService } from "../../services/axiosService";
 import styles from "./Newsletter.module.css";
 
 const Newsletter = () => {
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
   const [message, setMessage] = useState(null);
-  const { token, user } = useAuth();
+  const { user } = useAuth();
   console.log("Current user:", user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(
-        "/newsletter/send",
-        { subject, content },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      await apiService.post("/newsletter/send", { subject, content }, true);
       setMessage("Newsletter sent successfully");
     } catch (err) {
       setMessage(err.response?.data?.message || "Sending failed");

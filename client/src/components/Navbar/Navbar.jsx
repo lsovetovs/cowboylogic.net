@@ -5,6 +5,8 @@ import styles from "./Navbar.module.css";
 import clsx from "clsx";
 import searchIcon from "/assets/svg/search-icon.svg";
 import { useAuth } from "../../context/AuthContext";
+import { ROLES } from "../../constants/roles";
+
 
 const buildLinkClass = ({ isActive }) =>
   clsx(styles.navLink, isActive && styles.active);
@@ -102,11 +104,11 @@ export const Navbar = () => {
           {/* <NavLink to="/contact" className={buildLinkClass} onClick={handleCloseDropdown}>
             ContactUs
           </NavLink> */}
-          {user && ["admin", "superadmin"].includes(user.role) && (
-            <NavLink to="/admin" className={buildLinkClass} onClick={handleCloseDropdown}>
-              Admin Dashboard
-            </NavLink>
-          )}
+{user && [ROLES.ADMIN, ROLES.SUPERADMIN].includes(user.role) && (
+  <NavLink to="/admin" className={buildLinkClass} onClick={handleCloseDropdown}>
+    Admin Dashboard
+  </NavLink>
+)}
           <NavLink to="/bookstore" className={buildLinkClass} onClick={handleCloseDropdown}>
             CLP Book Store
           </NavLink>

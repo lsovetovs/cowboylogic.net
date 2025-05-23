@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { ROLES } from "../../constants/roles";
 import styles from "./AdminDashboard.module.css";
 
 const AdminDashboard = () => {
   const { user } = useAuth();
 
-  if (!user || !["admin", "superadmin"].includes(user.role)) {
+  if (!user || ![ROLES.ADMIN, ROLES.SUPERADMIN].includes(user.role)) {
     return <p>Access denied</p>;
   }
 
@@ -22,7 +23,6 @@ const AdminDashboard = () => {
         <li>
           <Link to="/admin/newsletter">Send Newsletter</Link>
         </li>
-        {/* Додай інші адмінські посилання за потреби */}
       </ul>
     </div>
   );

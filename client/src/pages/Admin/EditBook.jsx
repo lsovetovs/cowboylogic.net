@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "../../store/axios";
-import { useAuth } from "../../context/AuthContext";
+import { apiService } from "../services/axiosService";
 
 const EditBook = () => {
   const { id } = useParams();
-  const { token } = useAuth();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -22,8 +20,7 @@ const EditBook = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(`/books/${id}`)
+    apiService.get(`/books/${id}`)
       .then((res) => {
         const { title, author, description, price, imageUrl, inStock } = res.data;
         setFormData({ title, author, description, price, imageUrl, inStock });
@@ -49,11 +46,8 @@ const EditBook = () => {
     setSuccess(null);
 
     try {
-      await axios.put(`/books/${id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+await apiService.put(`/books/${id}`, formData, true);
+
 
       setSuccess("✅ Book updated successfully");
       setTimeout(() => navigate("/bookstore"), 1500);

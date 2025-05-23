@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import axios from "../../store/axios";
-import { useAuth } from "../../context/AuthContext";
+
+import { ROLES } from "../../constants/roles";
+import { apiService } from "../../services/axiosService";
 import styles from "./UserManagement.module.css";
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
-  const { token } = useAuth();
+
 
   useEffect(() => {
     fetchUsers();
@@ -13,35 +14,26 @@ const UserManagement = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("/users", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await apiService.get("/users", true);
       setUsers(res.data);
     } catch (err) {
       console.error("Failed to fetch users", err);
     }
   };
 
-const handleRoleChange = async (id, newRole) => {
-  try {
-    await axios.patch(
-      `/users/${id}/role`,
-      { role: newRole },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    fetchUsers();
-  } catch (err) {
-    alert(err.response?.data?.message || "Update failed");
-  }
-};
-
+  const handleRoleChange = async (id, newRole) => {
+    try {
+      await apiService.patch(`/users/${id}/role`, { role: newRole }, true);
+      fetchUsers();
+    } catch (err) {
+      alert(err.response?.data?.message || "Update failed");
+    }
+  };
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
     try {
-      await axios.delete(`/users/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await apiService.delete(`/users/${id}`, true);
       fetchUsers();
     } catch (err) {
       alert(err.response?.data?.message || "Delete failed");
@@ -75,8 +67,8 @@ const handleRoleChange = async (id, newRole) => {
                     value={u.role}
                     onChange={(e) => handleRoleChange(u.id, e.target.value)}
                   >
-                    <option value="user">user</option>
-                    <option value="admin">admin</option>
+                    <option value={ROLES.USER}>user</option>
+                    <option value={ROLES.ADMIN}>admin</option>
                   </select>
                 )}
               </td>
