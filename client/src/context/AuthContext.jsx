@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "../store/axios";
 
@@ -6,7 +7,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => localStorage.getItem("token"));
-  const [isLoading, setIsLoading] = useState(true); // додано
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -21,7 +22,7 @@ export const AuthProvider = ({ children }) => {
           localStorage.removeItem("token");
         }
       }
-      setIsLoading(false); // завершення ініціалізації
+      setIsLoading(false);
     };
 
     fetchUser();
@@ -32,6 +33,12 @@ export const AuthProvider = ({ children }) => {
     setToken(res.data.token);
     localStorage.setItem("token", res.data.token);
     setUser(res.data.user);
+  };
+
+  const loginWithToken = (data) => {
+    setToken(data.token);
+    localStorage.setItem("token", data.token);
+    setUser(data.user);
   };
 
   const register = async (data) => {
@@ -49,7 +56,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, token, login, register, logout, isLoading }}
+      value={{ user, token, login, loginWithToken, register, logout, isLoading }}
     >
       {children}
     </AuthContext.Provider>

@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import styles from "./Header.module.css";
@@ -24,7 +25,9 @@ const Header = () => {
               <Link to="/orders" className={styles.authBtn}>
                 My Orders
               </Link>
-
+              <Link to="/profile" className={styles.authBtn}>
+                My Profile
+              </Link>
               <span className={styles.userEmail}>Welcome, {user.email}</span>
               <button className={styles.logoutBtn} onClick={logout}>
                 Logout
@@ -47,3 +50,4 @@ const Header = () => {
 };
 
 export default Header;
+
