@@ -40,7 +40,7 @@ const CowboyCollegeLeadership = lazy(() =>
 const CowboyCollegePubAuthor = lazy(() =>
   import("./pages/CowboyCollegePubAuthor/CowboyCollegePubAuthor")
 );
-const BooksBooks = lazy(() => import("./pages/BooksBooks/BooksBooks"));
+// const BooksBooks = lazy(() => import("./pages/BooksBooks/BooksBooks"));
 const B2BBookstores = lazy(() => import("./pages/B2BBookstores/B2BBookstores"));
 
 // 🔐 Auth
@@ -105,7 +105,7 @@ const App = () => {
               path="/clpublishing/cowboy-college-pub/author"
               element={<CowboyCollegePubAuthor />}
             />
-            <Route path="/clpublishing/books-books" element={<BooksBooks />} />
+            {/* <Route path="/clpublishing/books-books" element={<BooksBooks />} /> */}
             <Route
               path="/clpublishing/b2b-bookstores"
               element={<B2BBookstores />}

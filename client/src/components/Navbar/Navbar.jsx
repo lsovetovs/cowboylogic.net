@@ -95,7 +95,7 @@ export const Navbar = () => {
               <div className={styles.dropdownMenu}>
                 <NavLink to="/clpublishing" className={styles.dropdownItem} onClick={handleCloseDropdown}>CLPublishing Home</NavLink>
                 <NavLink to="/clpublishing/cowboy-college-pub/author" className={styles.dropdownItem} onClick={handleCloseDropdown}>Cowboy College Pub/Author</NavLink>
-                <NavLink to="/clpublishing/books-books" className={styles.dropdownItem} onClick={handleCloseDropdown}>Books Books</NavLink>
+                {/* <NavLink to="/clpublishing/books-books" className={styles.dropdownItem} onClick={handleCloseDropdown}>Books Books</NavLink> */}
                 <NavLink to="/clpublishing/b2b-bookstores" className={styles.dropdownItem} onClick={handleCloseDropdown}>B2B Bookstores</NavLink>
               </div>
             )}
