@@ -1,10 +1,10 @@
 import { useState } from "react";
 import styles from "./EditableToolbar.module.css";
 import DOMPurify from "dompurify";
-import ImageInsertModal from "../../../modals/ImageInsertModal/ImageInsertModal.jsx";
-import TableInsertModal from "../../../modals/TableInsertModal/TableInsertModal.jsx";
-import ClearConfirmModal from "../../../modals/ClearConfirmModal/ClearConfirmModal.jsx";
-import LinkInsertModal from "../../../modals/LinkInsertModal/LinkInsertModal.jsx";
+import ImageInsertModal from "../modals/ImageInsertModal/ImageInsertModal.jsx";
+import TableInsertModal from "../modals/TableInsertModal/TableInsertModal.jsx";
+import ClearConfirmModal from "../modals/ClearConfirmModal/ClearConfirmModal.jsx";
+import LinkInsertModal from "../modals/LinkInsertModal/LinkInsertModal.jsx";
 
 import {
   Bold, Italic, Underline, Strikethrough,
