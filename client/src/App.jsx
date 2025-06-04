@@ -1,14 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import styles from "./App.module.css";
-import { useAuth } from "./context/AuthContext";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 
 import Loader from "./components/Loader/Loader";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import Notification from "./components/Notification/Notification"; // ✅ кастомний
 
 import AdminRoute from "./routes/AdminRoute";
 import PrivateRoute from "./routes/PrivateRoute";
@@ -62,7 +61,7 @@ const UserManagement = lazy(() => import("./pages/Admin/UserManagement"));
 const Newsletter = lazy(() => import("./pages/Admin/Newsletter"));
 
 const App = () => {
-  const { isLoading } = useAuth();
+  const isLoading = useSelector((state) => state.auth.isLoading);
 
   if (isLoading) return <Loader />;
 
@@ -70,6 +69,7 @@ const App = () => {
     <div className={styles.container}>
       <Header />
       <Navbar />
+      <Notification /> {/* ✅ Кастомний нотифікейшн */}
       <Suspense fallback={<Loader />}>
         <main className={styles.page}>
           <Routes>
@@ -134,8 +134,7 @@ const App = () => {
                   <ProfilePage />
                 </PrivateRoute>
               }
-            />{" "}
-            {/* ✅ */}
+            />
             {/* Admin */}
             <Route
               path="/admin"
@@ -180,15 +179,6 @@ const App = () => {
           </Routes>
         </main>
       </Suspense>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        pauseOnHover
-        theme="light"
-      />
       <Footer />
     </div>
   );

@@ -1,17 +1,15 @@
-// 📦 RegisterForm.jsx — оновлений з toast
-
 import { useState } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import styles from "./RegisterForm.module.css";
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "../../store/axios";
+import { fetchCurrentUser } from "../../store/slices/authSlice";
+import { showNotification } from "../../store/slices/notificationSlice"; // ✅
 
 const RegisterForm = () => {
-  const { register, login } = useAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [form, setForm] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
@@ -21,11 +19,30 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await register(form);
-      toast.success("Account created successfully!");
+      await axios.post("/auth/register", form);
+      dispatch(showNotification({ message: "Account created successfully!", type: "success" }));
+
+      await axios.post("/auth/login", form);
+      await axios.post("/auth/request-code", { email: form.email });
+
+      const code = prompt("Enter the verification code sent to email:");
+      const verifyRes = await axios.post("/auth/verify-code", {
+        email: form.email,
+        code,
+      });
+
+      localStorage.setItem("token", verifyRes.data.token);
+      dispatch(fetchCurrentUser(verifyRes.data.token));
+
+      dispatch(showNotification({ message: "Welcome!", type: "success" }));
       navigate("/");
     } catch (err) {
-      toast.error(err.response?.data?.message || "Registration failed");
+      dispatch(
+        showNotification({
+          message: err.response?.data?.message || "Registration failed",
+          type: "error",
+        })
+      );
     }
   };
 
@@ -35,16 +52,14 @@ const RegisterForm = () => {
         id_token: credentialResponse.credential,
       });
 
-      login({
-        token: res.data.token,
-        user: res.data.user,
-      });
+      localStorage.setItem("token", res.data.token);
+      dispatch(fetchCurrentUser(res.data.token));
 
-      toast.success("Logged in with Google!");
+      dispatch(showNotification({ message: "Logged in with Google!", type: "success" }));
       navigate("/");
     } catch (err) {
       console.error("Google signup error", err);
-      toast.error("Google signup failed");
+      dispatch(showNotification({ message: "Google signup failed", type: "error" }));
     }
   };
 
@@ -74,7 +89,9 @@ const RegisterForm = () => {
       <div className={styles["google-signup"]}>
         <GoogleLogin
           onSuccess={handleGoogleSignup}
-          onError={() => toast.error("Google signup failed")}
+          onError={() =>
+            dispatch(showNotification({ message: "Google signup failed", type: "error" }))
+          }
         />
       </div>
     </div>

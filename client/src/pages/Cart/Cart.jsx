@@ -1,50 +1,38 @@
-import { useEffect, useState, useCallback } from "react";
-import { useAuth } from "../../context/AuthContext";
-import axios from "../../store/axios";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchCartItems } from "../../store/slices/cartSlice";
+import { toast } from "react-toastify";
+import { apiService } from "../../services/axiosService";
 import styles from "./Cart.module.css";
 
 const Cart = () => {
-  const { token } = useAuth();
-  const [items, setItems] = useState([]);
-  const [error, setError] = useState(null);
-
-  const fetchCart = useCallback(() => {
-    axios
-      .get("/cart", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => setItems(res.data))
-      .catch(() => setError("Failed to load cart"));
-  }, [token]);
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+  const items = useSelector((state) => state.cart.items);
+  const error = useSelector((state) => state.cart.error);
 
   useEffect(() => {
-    fetchCart();
-  }, [fetchCart]);
+    dispatch(fetchCartItems());
+  }, [dispatch]);
 
   const handleQuantityChange = async (itemId, newQuantity) => {
     if (newQuantity < 1) return;
     try {
-      await axios.patch(
-        `/cart/${itemId}`,
-        { quantity: newQuantity },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      fetchCart();
+      await apiService.patch(`/cart/${itemId}`, { quantity: newQuantity }, token);
+      dispatch(fetchCartItems());
+      toast.success("Quantity updated");
     } catch {
-      alert("Update failed");
+      toast.error("Failed to update quantity");
     }
   };
 
   const handleRemove = async (itemId) => {
     try {
-      await axios.delete(`/cart/${itemId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      fetchCart();
+      await apiService.delete(`/cart/${itemId}`, token);
+      dispatch(fetchCartItems());
+      toast.success("Item removed from cart");
     } catch {
-      alert("Failed to remove item");
+      toast.error("Failed to remove item");
     }
   };
 
@@ -56,17 +44,10 @@ const Cart = () => {
         quantity: item.quantity,
       }));
 
-      const res = await axios.post(
-        "/orders/create-checkout-session",
-        { items: stripeItems },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
+      const res = await apiService.post("/orders/create-checkout-session", { items: stripeItems }, token);
       window.location.href = res.data.url;
     } catch (err) {
-      alert("Stripe checkout failed");
+      toast.error("Stripe checkout failed");
       console.error(err);
     }
   };
@@ -89,7 +70,7 @@ const Cart = () => {
             {items.map((item) => (
               <li key={item.id}>
                 <strong>{item.Book.title}</strong>
-                <span className={styles.price}>— ${item.Book.price}</span>
+                <span className={styles.price}> — ${item.Book.price}</span>
                 <input
                   type="number"
                   min="1"

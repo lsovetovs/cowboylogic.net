@@ -1,33 +1,44 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { ROLES } from "../../constants/roles";
 import { apiService } from "../../services/axiosService";
-import { toast } from "react-toastify";
+import { showNotification } from "../../store/slices/notificationSlice";
 import styles from "./UserManagement.module.css";
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     try {
       const res = await apiService.get("/users", true);
       setUsers(res.data);
     } catch (err) {
       console.error("Failed to fetch users", err);
-      toast.error("Failed to fetch users");
+      dispatch(
+        showNotification({ message: "❌ Failed to fetch users", type: "error" })
+      );
     }
-  };
+  }, [dispatch]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
 
   const handleRoleChange = async (id, newRole) => {
     try {
       await apiService.patch(`/users/${id}/role`, { role: newRole }, true);
       fetchUsers();
-      toast.success("User role updated");
+      dispatch(
+        showNotification({ message: "✅ User role updated", type: "success" })
+      );
     } catch (err) {
-      toast.error(err.response?.data?.message || "Update failed");
+      dispatch(
+        showNotification({
+          message: err.response?.data?.message || "❌ Update failed",
+          type: "error",
+        })
+      );
     }
   };
 
@@ -36,9 +47,16 @@ const UserManagement = () => {
     try {
       await apiService.delete(`/users/${id}`, true);
       fetchUsers();
-      toast.success("User deleted");
+      dispatch(
+        showNotification({ message: "✅ User deleted", type: "success" })
+      );
     } catch (err) {
-      toast.error(err.response?.data?.message || "Delete failed");
+      dispatch(
+        showNotification({
+          message: err.response?.data?.message || "❌ Delete failed",
+          type: "error",
+        })
+      );
     }
   };
 

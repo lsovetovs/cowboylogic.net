@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styles from "./Contact.module.css";
 import axios from "../../store/axios";
+import { showNotification } from "../../store/slices/notificationSlice";
 
 const Contact = () => {
+  const dispatch = useDispatch();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,20 +16,33 @@ const Contact = () => {
     e.preventDefault();
     try {
       await axios.post("/contact", { firstName, lastName, email, comment });
-      alert("Message sent!");
+
+      dispatch(
+        showNotification({
+          message: "✅ Message sent successfully!",
+          type: "success",
+        })
+      );
+
+      // Очистити форму після успішної відправки
       setFirstName("");
       setLastName("");
       setEmail("");
       setComment("");
-    } catch  {
-      alert("Failed to send message");
+    } catch {
+      dispatch(
+        showNotification({
+          message: "❌ Failed to send message",
+          type: "error",
+        })
+      );
     }
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.contact}>
-        <h2>ContactUs</h2>
+        <h2>Contact Us</h2>
         <form className={styles.form} onSubmit={handleSubmit}>
           <input
             type="text"

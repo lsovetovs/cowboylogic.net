@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "../../store/axios";
-import { useAuth } from "../../context/AuthContext";
-import styles from "./BookForm.module.css"
+import styles from "./BookForm.module.css";
+import { useSelector } from "react-redux";
 
-const BookForm = () => {
+const BookForm = ({ onSuccess, onError }) => {
   const { id } = useParams(); // null → створення, значення → редагування
   const navigate = useNavigate();
-  const { token } = useAuth();
+  const token = useSelector((state) => state.auth.token);
 
   const [form, setForm] = useState({
     title: "",
@@ -18,16 +18,16 @@ const BookForm = () => {
     inStock: true,
   });
 
-  const [error, setError] = useState(null);
-
   useEffect(() => {
     if (id) {
       axios
         .get(`/books/${id}`)
         .then((res) => setForm(res.data))
-        .catch(() => setError("Failed to load book"));
+        .catch(() => {
+          if (onError) onError("❌ Failed to load book");
+        });
     }
-  }, [id]);
+  }, [id, onError]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -41,14 +41,17 @@ const BookForm = () => {
         await axios.put(`/books/${id}`, form, {
           headers: { Authorization: `Bearer ${token}` },
         });
+        if (onSuccess) onSuccess("✅ Book updated successfully");
       } else {
         await axios.post("/books", form, {
           headers: { Authorization: `Bearer ${token}` },
         });
+        if (onSuccess) onSuccess("✅ Book created successfully");
       }
       navigate("/bookstore");
     } catch (err) {
-      setError(err.response?.data?.message || "Error saving book");
+      const msg = err.response?.data?.message || "❌ Error saving book";
+      if (onError) onError(msg);
     }
   };
 
@@ -56,17 +59,54 @@ const BookForm = () => {
     <div className={styles.bookForm}>
       <h2>{id ? "Edit Book" : "Add New Book"}</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="title" value={form.title} onChange={handleChange} placeholder="Title" required />
-        <input type="text" name="author" value={form.author} onChange={handleChange} placeholder="Author" required />
-        <textarea name="description" value={form.description} onChange={handleChange} placeholder="Description" />
-        <input type="number" name="price" value={form.price} onChange={handleChange} placeholder="Price" step="0.01" required />
-        <input type="text" name="imageUrl" value={form.imageUrl} onChange={handleChange} placeholder="Image URL" />
+        <input
+          type="text"
+          name="title"
+          value={form.title}
+          onChange={handleChange}
+          placeholder="Title"
+          required
+        />
+        <input
+          type="text"
+          name="author"
+          value={form.author}
+          onChange={handleChange}
+          placeholder="Author"
+          required
+        />
+        <textarea
+          name="description"
+          value={form.description}
+          onChange={handleChange}
+          placeholder="Description"
+        />
+        <input
+          type="number"
+          name="price"
+          value={form.price}
+          onChange={handleChange}
+          placeholder="Price"
+          step="0.01"
+          required
+        />
+        <input
+          type="text"
+          name="imageUrl"
+          value={form.imageUrl}
+          onChange={handleChange}
+          placeholder="Image URL"
+        />
         <label>
-          <input type="checkbox" name="inStock" checked={form.inStock} onChange={handleChange} />
+          <input
+            type="checkbox"
+            name="inStock"
+            checked={form.inStock}
+            onChange={handleChange}
+          />
           In Stock
         </label>
         <button type="submit">{id ? "Update Book" : "Create Book"}</button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
     </div>
   );

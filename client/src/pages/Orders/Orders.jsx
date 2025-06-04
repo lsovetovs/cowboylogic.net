@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useSelector } from "react-redux";
 import useFetch from "../../hooks/useFetch";
 import { apiService } from "../../services/axiosService";
 import { toast } from "react-toastify";
 import styles from "./Orders.module.css";
 
 const Orders = () => {
-  const { user } = useAuth();
-  const { data: ordersData, loading, error } = useFetch("/orders", true);
+  const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state) => state.auth.token);
+  const { data: ordersData, loading, error } = useFetch("/orders", token);
   const [orders, setOrders] = useState([]);
 
-  // Синхронізація локального стану після fetch
   useEffect(() => {
     if (ordersData) setOrders(ordersData);
   }, [ordersData]);
@@ -19,7 +19,7 @@ const Orders = () => {
     if (!window.confirm("Are you sure you want to delete this order?")) return;
 
     try {
-      await apiService.delete(`/orders/${orderId}`, true);
+      await apiService.delete(`/orders/${orderId}`, token);
       setOrders((prev) => prev.filter((o) => o.id !== orderId));
       toast.success("Order deleted successfully");
     } catch (err) {

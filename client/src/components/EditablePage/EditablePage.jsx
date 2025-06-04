@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useSelector } from "react-redux";
 import { apiService } from "../../services/axiosService";
 import styles from "./EditablePage.module.css";
 import DOMPurify from "dompurify";
@@ -8,7 +8,9 @@ import { toast } from "react-toastify";
 import EditableToolbar from "../../components/EditableToolbar/EditableToolbar";
 
 const EditablePage = ({ slug, title }) => {
-  const { user } = useAuth();
+  const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state) => state.auth.token);
+
   const [content, setContent] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState(null);
@@ -34,7 +36,7 @@ const EditablePage = ({ slug, title }) => {
   const handleSave = async () => {
     try {
       const cleanContent = DOMPurify.sanitize(editorRef.current.innerHTML);
-      await apiService.put(`/pages/${slug}`, { content: cleanContent }, true);
+      await apiService.put(`/pages/${slug}`, { content: cleanContent }, token);
       setContent(cleanContent);
       setIsEditing(false);
       toast.success("Page content saved successfully!");

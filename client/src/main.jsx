@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-// import { Provider } from "react-redux";
-// import { store } from "./store/store";
-import App from "./App.jsx";
-import { AuthProvider } from "./context/AuthContext.jsx";
+import { Provider } from "react-redux";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import './i18n'; // 👈 Додай це
+import { store } from "./store/store";
+import App from "./App.jsx";
+import AuthLoader from "./components/AuthLoader/AuthLoader"; // 👈 Додано
 
+import './i18n';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -15,13 +15,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-      {/* <Provider store={store}> */}
-      <BrowserRouter>
-        <AuthProvider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <AuthLoader /> {/* 👈 Викликає fetchCurrentUser при старті */}
           <App />
-        </AuthProvider>
-      </BrowserRouter>
-      {/* </Provider> */}
+        </BrowserRouter>
+      </Provider>
     </GoogleOAuthProvider>
   </React.StrictMode>
 );

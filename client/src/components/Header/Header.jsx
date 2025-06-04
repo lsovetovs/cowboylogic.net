@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../store/slices/authSlice";
 import styles from "./Header.module.css";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
 const Header = () => {
-  const { user, logout } = useAuth();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   return (
     <header className={styles.header}>
@@ -23,7 +29,7 @@ const Header = () => {
               <Link to="/orders" className={styles.authBtn}>My Orders</Link>
               <Link to="/profile" className={styles.authBtn}>My Profile</Link>
               <span className={styles.userEmail}>Welcome, {user.email}</span>
-              <button className={styles.logoutBtn} onClick={logout}>Logout</button>
+              <button className={styles.logoutBtn} onClick={handleLogout}>Logout</button>
             </>
           ) : (
             <>

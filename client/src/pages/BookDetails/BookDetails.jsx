@@ -1,30 +1,40 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import useFetch from "../../hooks/useFetch";
-import { apiService } from "../../services/axiosService";
-import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBooks, setSelectedBook } from "../../store/slices/bookSlice";
+import { showNotification } from "../../store/slices/notificationSlice"; // ✅ нове
 import styles from "./BookDetails.module.css";
+import axios from "../../store/axios";
 
 const BookDetails = () => {
   const { id } = useParams();
-  const { user } = useAuth();
-  const { data: book, loading, error } = useFetch(`/books/${id}`);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state) => state.auth.token);
+  const { books, loading, error } = useSelector((state) => state.books);
+  const book = books.find((b) => b.id === Number(id));
+
+  useEffect(() => {
+    if (!books.length) {
+      dispatch(fetchBooks());
+    } else {
+      dispatch(setSelectedBook(book));
+    }
+  }, [dispatch, books, book]);
 
   const handleAddToCart = async () => {
     try {
-      await apiService.post(
-        "/cart",
-        { bookId: book.id, quantity: 1 },
-        true
-      );
-      toast.success("Book added to cart!");
+      await axios.post("/cart", { bookId: book.id, quantity: 1 }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch(showNotification({ message: "Book added to cart!", type: "success" }));
     } catch (err) {
       console.error("Add to cart failed", err);
-      toast.error("Error adding book to cart");
+      dispatch(showNotification({ message: "Error adding book to cart", type: "error" }));
     }
   };
 
-  if (loading) return <h2>Loading...</h2>;
+  if (loading || !book) return <h2>Loading...</h2>;
   if (error) return <h2>{error}</h2>;
 
   return (

@@ -1,10 +1,22 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useSelector, useDispatch } from "react-redux";
+import { showNotification } from "../../store/slices/notificationSlice";
+
 import { ROLES } from "../../constants/roles";
 import styles from "./AdminDashboard.module.css";
 
 const AdminDashboard = () => {
-  const { user } = useAuth();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    if (!user || ![ROLES.ADMIN, ROLES.SUPERADMIN].includes(user.role)) {
+      dispatch(
+        showNotification({ message: "❌ Access denied", type: "error" })
+      );
+    }
+  }, [user, dispatch]);
 
   if (!user || ![ROLES.ADMIN, ROLES.SUPERADMIN].includes(user.role)) {
     return <p>Access denied</p>;

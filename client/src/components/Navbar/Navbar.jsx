@@ -1,12 +1,10 @@
-
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Navbar.module.css";
 import clsx from "clsx";
 import searchIcon from "/assets/svg/search-icon.svg";
-import { useAuth } from "../../context/AuthContext";
+import { useSelector } from "react-redux"; 
 import { ROLES } from "../../constants/roles";
-
 
 const buildLinkClass = ({ isActive }) =>
   clsx(styles.navLink, isActive && styles.active);
@@ -18,9 +16,9 @@ export const Navbar = () => {
 
   const clStrategiesRef = useRef(null);
   const clPublishingRef = useRef(null);
-  const navbarRef = useRef(null); // 👈 Ref на весь навбар
+  const navbarRef = useRef(null);
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const user = useSelector((state) => state.auth.user); // ✅
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -104,11 +102,13 @@ export const Navbar = () => {
           {/* <NavLink to="/contact" className={buildLinkClass} onClick={handleCloseDropdown}>
             ContactUs
           </NavLink> */}
-{user && [ROLES.ADMIN, ROLES.SUPERADMIN].includes(user.role) && (
-  <NavLink to="/admin" className={buildLinkClass} onClick={handleCloseDropdown}>
-    Admin Dashboard
-  </NavLink>
-)}
+
+          {user && [ROLES.ADMIN, ROLES.SUPERADMIN].includes(user.role) && (
+            <NavLink to="/admin" className={buildLinkClass} onClick={handleCloseDropdown}>
+              Admin Dashboard
+            </NavLink>
+          )}
+
           <NavLink to="/bookstore" className={buildLinkClass} onClick={handleCloseDropdown}>
             CLP Book Store
           </NavLink>

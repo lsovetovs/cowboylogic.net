@@ -1,22 +1,26 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import axios from "../../store/axios";
+import { showNotification } from "../../store/slices/notificationSlice"; // ✅
 import styles from "./NewsletterSignup.module.css";
 
 const NewsletterSignup = () => {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState(null);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus(null);
     try {
       await axios.post("/newsletter/subscribe", { email });
-      setStatus("✅ Subscribed successfully!");
+      dispatch(showNotification({ message: "✅ Subscribed successfully!", type: "success" }));
       setEmail("");
     } catch (err) {
-      const msg =
-        err.response?.data?.message || "❌ Subscription failed. Try again.";
-      setStatus(msg);
+      dispatch(
+        showNotification({
+          message: err.response?.data?.message || "❌ Subscription failed. Try again.",
+          type: "error",
+        })
+      );
     }
   };
 
@@ -33,11 +37,10 @@ const NewsletterSignup = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-<button type="submit" className={styles.subscribeBtn}>
-  Subscribe
-</button>
+          <button type="submit" className={styles.subscribeBtn}>
+            Subscribe
+          </button>
         </div>
-        {status && <p className={styles.status}>{status}</p>}
       </form>
     </div>
   );

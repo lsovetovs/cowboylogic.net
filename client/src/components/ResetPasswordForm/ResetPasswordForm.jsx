@@ -1,21 +1,19 @@
-
 import { useState } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../store/slices/authSlice";
 import styles from "./ResetPasswordForm.module.css";
 import axios from "../../store/axios";
+import { toast } from "react-toastify";
 
 const ResetPasswordForm = () => {
-  const { token, logout } = useAuth();
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [message, setMessage] = useState(null);
-  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage(null);
-    setError(null);
 
     try {
       await axios.patch(
@@ -23,10 +21,10 @@ const ResetPasswordForm = () => {
         { oldPassword, newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setMessage("Password updated successfully. You will be logged out.");
-      setTimeout(() => logout(), 2000);
+      toast.success("✅ Password updated. You will be logged out...");
+      setTimeout(() => dispatch(logout()), 2000);
     } catch (err) {
-      setError(err.response?.data?.message || "Error updating password");
+      toast.error(err.response?.data?.message || "❌ Error updating password");
     }
   };
 
@@ -50,8 +48,6 @@ const ResetPasswordForm = () => {
         />
         <button type="submit">Update Password</button>
       </form>
-      {message && <p className={styles.success}>{message}</p>}
-      {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 };

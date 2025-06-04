@@ -1,22 +1,26 @@
 import { useState } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useDispatch } from "react-redux";
 import { apiService } from "../../services/axiosService";
-import { toast } from "react-toastify";
+import { showNotification } from "../../store/slices/notificationSlice"; // ✅
 import styles from "./Newsletter.module.css";
 
 const Newsletter = () => {
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
-  const { user } = useAuth();
-  console.log("Current user:", user);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await apiService.post("/newsletter/send", { subject, content }, true);
-      toast.success("✅ Newsletter sent successfully");
+      dispatch(showNotification({ message: "✅ Newsletter sent successfully", type: "success" }));
     } catch (err) {
-      toast.error(err.response?.data?.message || "❌ Sending failed");
+      dispatch(
+        showNotification({
+          message: err.response?.data?.message || "❌ Sending failed",
+          type: "error",
+        })
+      );
     }
   };
 
