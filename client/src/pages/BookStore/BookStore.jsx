@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import BookList from "../../components/BookList/BookList";
 import axios from "../../store/axios";
-import { useAuth } from "../../context/AuthContext";
 import styles from "./BookStore.module.css";
 
 const BookStore = () => {
   const [books, setBooks] = useState([]);
-  const { user } = useAuth();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     axios
