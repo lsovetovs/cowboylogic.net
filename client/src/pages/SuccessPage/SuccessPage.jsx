@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../../store/axios";
-
-import { useAuth } from "../../context/AuthContext";
+import { useSelector } from "react-redux";
 
 const SuccessPage = () => {
-  const { token } = useAuth();
   const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
     const confirmOrder = async () => {
@@ -21,7 +20,9 @@ const SuccessPage = () => {
       }
     };
 
-    confirmOrder();
+    if (token) {
+      confirmOrder();
+    }
   }, [token]);
 
   return (
