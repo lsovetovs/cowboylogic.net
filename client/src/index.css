@@ -49,12 +49,11 @@ body {
   margin: 0;
   font-family: var(--font-family-body);
   background-image: linear-gradient(
-      rgba(46, 47, 66, 0.4),
-      rgba(46, 47, 66, 0.4)
+      rgba(46, 47, 66, 0.5),
+      rgba(46, 47, 66, 0.5)
     ),
     url(/assets/images/body_bg_cowboy.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-repeat: round;
   background-attachment: fixed;
   background-position: center;
 }

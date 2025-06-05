@@ -19,4 +19,11 @@ const notificationSlice = createSlice({
 });
 
 export const { showNotification, hideNotification } = notificationSlice.actions;
+
+export const showSuccess = (message) =>
+  showNotification({ message, type: "success" });
+
+export const showError = (message) =>
+  showNotification({ message, type: "error" });
+
 export default notificationSlice.reducer;

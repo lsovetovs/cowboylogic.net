@@ -1,27 +1,33 @@
 .switcher {
   display: flex;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .switcher button {
   background-color: transparent;
   border: 1px solid var(--color-brown);
-  border-radius: var(--radius-sm);
-  padding: 4px 8px;
-  font-size: 0.8rem;
+  border-radius: var(--radius-md); /* збігається з іншими кнопками */
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 1rem;
   cursor: pointer;
   color: white;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  line-height: 1.2;
+  box-sizing: border-box;
+  font-family: inherit;
 }
 
 .switcher button:hover {
-  background-color: var(--color-brown);
-  color: white;
+  background-color: white;
+  color: var(--color-darker);
 }
 
 .switcher .active {
-  background-color: var(--color-brown);
+
   color: white;
   font-weight: bold;
   border-color: white;
+
 }
