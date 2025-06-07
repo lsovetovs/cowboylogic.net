@@ -1,46 +1,55 @@
-// components/ImageInsertModal/ImageInsertModal.jsx
 import { useState } from "react";
 import styles from "./ImageInsertModal.module.css";
 
 const ImageInsertModal = ({ onInsert, onClose }) => {
   const [url, setUrl] = useState("");
+  const [file, setFile] = useState(null);
   const [preview, setPreview] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!url.trim()) return;
-    onInsert(url);
+    if (file) {
+      onInsert({ file, url: "" });
+    } else if (url.trim()) {
+      onInsert({ file: null, url: url.trim() });
+    }
     setUrl("");
     setPreview("");
+    setFile(null);
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setUrl(reader.result);
-      setPreview(reader.result);
-    };
-    reader.readAsDataURL(file);
+    const selectedFile = e.target.files[0];
+    if (!selectedFile) return;
+    setFile(selectedFile);
+    setPreview(URL.createObjectURL(selectedFile));
+    setUrl("");
   };
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <h3>Insert Image</h3>
+        <h3>Choose Image</h3>
         <form onSubmit={handleSubmit}>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+          <p>or</p>
           <input
             type="text"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="Enter image URL..."
+            disabled={!!file}
           />
-          <input type="file" accept="image/*" onChange={handleFileChange} />
-          {preview && <img src={preview} alt="Preview" className={styles.preview} />}
+          {preview && (
+            <img src={preview} alt="Preview" className={styles.preview} />
+          )}
           <div className={styles.actions}>
             <button type="submit" className="btn btn-outline">
-              Insert
+              Confirm
             </button>
             <button type="button" className="btn btn-outline" onClick={onClose}>
               Cancel

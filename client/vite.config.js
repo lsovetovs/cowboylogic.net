@@ -1,25 +1,24 @@
-// import { defineConfig } from 'vite'
-// import react from '@vitejs/plugin-react-swc'
-
-// // https://vite.dev/config/
-// export default defineConfig({
-//   plugins: [react()],
-// })
-
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  // base: "/staging/",
   base: "/",
   plugins: [react()],
+  server: {
+    proxy: {
+      "/uploads": {
+        target: "http://localhost:5000",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
   build: {
-    outDir: "dist", // Куди буде збережений білд
-    target: "esnext", // Використовує найновіший JS для сучасних браузерів
+    outDir: "dist",
+    target: "esnext",
     rollupOptions: {
       output: {
-        format: "es", // Забезпечує правильний формат модулів
+        format: "es",
       },
     },
   },

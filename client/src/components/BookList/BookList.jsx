@@ -4,6 +4,7 @@ import { showSuccess, showError } from "../../store/slices/notificationSlice";
 import { useDispatch } from "react-redux";
 import axios from "../../store/axios";
 import styles from "./BookList.module.css";
+import BookCard from "../BookCard/BookCard";
 
 const BookList = ({ books = [], onDelete }) => {
   const user = useSelector((state) => state.auth.user);
@@ -45,39 +46,23 @@ const BookList = ({ books = [], onDelete }) => {
     }
   };
 
+  const handleToggleFavorite = (bookId) => {
+    console.log("Toggle favorite:", bookId); // поки що мок, заміниш на dispatch
+  };
+
   return (
     <div className={styles.bookList}>
       {books.map((book) => (
-        <div key={book.id} className={styles.card}>
-          <img src={book.imageUrl} alt={book.title} className={styles.image} />
-
-          <div className={styles.info}>
-            {/* Admin buttons top right */}
-            {user?.role === "admin" && (
-              <div className={styles.actions}>
-                <button onClick={() => handleEdit(book.id)}>Edit</button>
-                <button onClick={() => handleDelete(book.id)}>Delete</button>
-              </div>
-            )}
-
-            <div>
-              <h3>{book.title}</h3>
-              <p>{book.author}</p>
-              <p>${book.price}</p>
-              <p>{book.inStock ? "In Stock" : "Out of Stock"}</p>
-            </div>
-
-            {/* Cart button at bottom */}
-            {user && (
-              <button
-                onClick={() => handleAddToCart(book.id)}
-                className={styles.cartButton}
-              >
-                Add to Cart
-              </button>
-            )}
-          </div>
-        </div>
+        <BookCard
+          key={book.id}
+          book={book}
+          isAdmin={user?.role === "admin" || user?.role === "superadmin"}
+          isLoggedIn={!!user}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+          onAddToCart={handleAddToCart}
+          onToggleFavorite={handleToggleFavorite}
+        />
       ))}
     </div>
   );

@@ -1,5 +1,3 @@
-/* BookForm.module.css */
-
 .bookForm {
   width: 100%;
   max-width: 720px;
@@ -61,10 +59,12 @@
   font-size: 1rem;
 }
 
-.bookForm button {
+/* Стиль кнопок */
+.bookForm button,
+.bookForm .btn {
   background: #8b4513;
   color: #fff;
-  padding: 0.85rem 2rem;
+  padding: 0.6rem 1.4rem;
   font-size: 1rem;
   font-weight: bold;
   border: none;
@@ -73,11 +73,21 @@
   transition: background 0.3s ease;
 }
 
-.bookForm button:hover {
+.bookForm button:hover,
+.bookForm .btn:hover {
   background: #a0522d;
 }
 
 .bookForm p {
   color: #ffaaaa;
   font-size: 0.9rem;
+}
+
+/* Уніфікований стиль прев’ю зображення */
+.previewImage {
+  max-width: 200px;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }

@@ -4,6 +4,7 @@ import bookReducer from "./slices/bookSlice";
 import pageReducer from "./slices/pageSlice";
 import authReducer from "./slices/authSlice";
 import notificationReducer from "./slices/notificationSlice";
+import favoritesReducer from "./slices/favoritesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     books: bookReducer,
     pages: pageReducer,
     notification: notificationReducer,
+    favorites: favoritesReducer,
   },
 });

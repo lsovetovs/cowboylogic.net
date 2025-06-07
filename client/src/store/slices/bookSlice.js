@@ -13,6 +13,19 @@ export const fetchBooks = createAsyncThunk(
   }
 );
 
+// ✅ NEW — fetch book by ID
+export const fetchBookById = createAsyncThunk(
+  'books/fetchBookById',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`/books/${id}`);
+      return response.data;
+    } catch {
+      return rejectWithValue('Failed to fetch book by ID');
+    }
+  }
+);
+
 const initialState = {
   books: [],
   selectedBook: null,
@@ -39,6 +52,20 @@ const bookSlice = createSlice({
         state.loading = false;
       })
       .addCase(fetchBooks.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      })
+
+      // ✅ fetchBookById handlers
+      .addCase(fetchBookById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchBookById.fulfilled, (state, action) => {
+        state.selectedBook = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchBookById.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
       });

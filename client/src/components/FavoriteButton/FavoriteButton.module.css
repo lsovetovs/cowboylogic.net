@@ -1,0 +1,14 @@
+.favoriteIconOnly {
+  padding: 0.1rem;
+  font-size: 1rem;
+  background-color: transparent;
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* .favoriteIconOnly:hover {
+  background-color: #a0522d;
+} */

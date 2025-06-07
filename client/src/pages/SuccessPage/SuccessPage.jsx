@@ -11,7 +11,7 @@ const SuccessPage = () => {
     const confirmOrder = async () => {
       try {
         await axios.post(
-          "/orders/confirm-stripe-order",
+          "/orders/confirm",
           {},
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -27,9 +27,11 @@ const SuccessPage = () => {
 
   return (
     <div style={{ textAlign: "center", padding: "2rem" }}>
-      <h2>🎉 Оплата пройшла успішно!</h2>
-      <p>Ми підтвердили ваше замовлення.</p>
-      <button onClick={() => navigate("/")}>На головну</button>
+      <h2>🎉 Payment Successful!</h2>
+      <p>Your order has been confirmed. Thank you for your purchase!</p>
+      <button className="btn btn-outline" onClick={() => navigate("/")}>
+        Go to Homepage
+      </button>
     </div>
   );
 };

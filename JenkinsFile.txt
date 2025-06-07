@@ -1,0 +1,26 @@
+pipeline {
+    agent {
+        node {
+            label 'built-in'
+        }
+    }
+
+    tools {
+        nodejs 'node24'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Verify Node Environment') {
+            steps {
+                sh 'node -v'
+                sh 'npm -v'
+            }
+        }
+    }
+}

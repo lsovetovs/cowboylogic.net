@@ -3,13 +3,13 @@ import { useState, useEffect, useRef } from "react";
 import styles from "./Navbar.module.css";
 import clsx from "clsx";
 import searchIcon from "/assets/svg/search-icon.svg";
-import { useSelector } from "react-redux"; 
+import { useSelector } from "react-redux";
 import { ROLES } from "../../constants/roles";
 
 const buildLinkClass = ({ isActive }) =>
   clsx(styles.navLink, isActive && styles.active);
 
-export const Navbar = () => {
+const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchVisible, setSearchVisible] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -18,7 +18,7 @@ export const Navbar = () => {
   const clPublishingRef = useRef(null);
   const navbarRef = useRef(null);
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user); // ✅
+  const user = useSelector((state) => state.auth.user);
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -37,11 +37,9 @@ export const Navbar = () => {
     setOpenDropdown(null);
   };
 
-  // ✅ Закриває дропдаун при кліку ПОЗА НАВБАРОМ
   useEffect(() => {
     const handleClickOutside = (event) => {
-      const isClickInsideNavbar = navbarRef.current?.contains(event.target);
-      if (!isClickInsideNavbar) {
+      if (!navbarRef.current?.contains(event.target)) {
         setOpenDropdown(null);
       }
     };
@@ -73,10 +71,18 @@ export const Navbar = () => {
             </NavLink>
             {openDropdown === "clstrategies" && (
               <div className={styles.dropdownMenu}>
-                <NavLink to="/clstrategies" className={styles.dropdownItem} onClick={handleCloseDropdown}>CLStrategies Home</NavLink>
-                <NavLink to="/clstrategies/cowboy-college-consulting" className={styles.dropdownItem} onClick={handleCloseDropdown}>Cowboy College Consulting</NavLink>
-                <NavLink to="/clstrategies/cowboy-college-start-up" className={styles.dropdownItem} onClick={handleCloseDropdown}>Cowboy College Start-up</NavLink>
-                <NavLink to="/clstrategies/cowboy-college-leadership" className={styles.dropdownItem} onClick={handleCloseDropdown}>Cowboy College Leadership</NavLink>
+                <NavLink to="/clstrategies" className={styles.dropdownItem} onClick={handleCloseDropdown}>
+                  CLStrategies Home
+                </NavLink>
+                <NavLink to="/clstrategies/cowboy-college-consulting" className={styles.dropdownItem} onClick={handleCloseDropdown}>
+                  Cowboy College Consulting
+                </NavLink>
+                <NavLink to="/clstrategies/cowboy-college-start-up" className={styles.dropdownItem} onClick={handleCloseDropdown}>
+                  Cowboy College Start-up
+                </NavLink>
+                <NavLink to="/clstrategies/cowboy-college-leadership" className={styles.dropdownItem} onClick={handleCloseDropdown}>
+                  Cowboy College Leadership
+                </NavLink>
               </div>
             )}
           </div>
@@ -91,17 +97,18 @@ export const Navbar = () => {
             </NavLink>
             {openDropdown === "clpublishing" && (
               <div className={styles.dropdownMenu}>
-                <NavLink to="/clpublishing" className={styles.dropdownItem} onClick={handleCloseDropdown}>CLPublishing Home</NavLink>
-                <NavLink to="/clpublishing/cowboy-college-pub/author" className={styles.dropdownItem} onClick={handleCloseDropdown}>Cowboy College Pub/Author</NavLink>
-                {/* <NavLink to="/clpublishing/books-books" className={styles.dropdownItem} onClick={handleCloseDropdown}>Books Books</NavLink> */}
-                <NavLink to="/clpublishing/b2b-bookstores" className={styles.dropdownItem} onClick={handleCloseDropdown}>B2B Bookstores</NavLink>
+                <NavLink to="/clpublishing" className={styles.dropdownItem} onClick={handleCloseDropdown}>
+                  CLPublishing Home
+                </NavLink>
+                <NavLink to="/clpublishing/cowboy-college-pub/author" className={styles.dropdownItem} onClick={handleCloseDropdown}>
+                  Cowboy College Pub/Author
+                </NavLink>
+                <NavLink to="/clpublishing/b2b-bookstores" className={styles.dropdownItem} onClick={handleCloseDropdown}>
+                  B2B Bookstores
+                </NavLink>
               </div>
             )}
           </div>
-
-          {/* <NavLink to="/contact" className={buildLinkClass} onClick={handleCloseDropdown}>
-            ContactUs
-          </NavLink> */}
 
           {user && [ROLES.ADMIN, ROLES.SUPERADMIN].includes(user.role) && (
             <NavLink to="/admin" className={buildLinkClass} onClick={handleCloseDropdown}>
@@ -115,6 +122,15 @@ export const Navbar = () => {
         </nav>
 
         <div className={styles.navRight}>
+          {user && (
+            <NavLink to="/profile" className={buildLinkClass}>
+              👤 Profile
+            </NavLink>
+          )}
+          <NavLink to="/favorites" className={buildLinkClass}>
+            ❤️ Favorites
+          </NavLink>
+
           <button
             className={styles.searchButton}
             onClick={() => setSearchVisible(!isSearchVisible)}

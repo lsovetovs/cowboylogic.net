@@ -8,6 +8,7 @@ import styles from "./Cart.module.css";
 const Cart = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
   const items = useSelector((state) => state.cart.items);
   const error = useSelector((state) => state.cart.error);
 
@@ -36,18 +37,25 @@ const Cart = () => {
     }
   };
 
-  const handleStripeCheckout = async () => {
+  const handleSquareCheckout = async () => {
     try {
-      const stripeItems = items.map((item) => ({
-        title: item.Book.title,
-        price: item.Book.price,
-        quantity: item.quantity,
-      }));
-
-      const res = await apiService.post("/orders/create-checkout-session", { items: stripeItems }, token);
-      window.location.href = res.data.url;
+      const totalPrice = items.reduce(
+        (sum, item) => sum + item.quantity * item.Book.price,
+        0
+      );
+      const res = await apiService.post(
+        "/square/create-payment",
+        {
+          title: "My Book Order",
+          price: totalPrice,
+          bookId: items[0]?.bookId,
+          userId: user.id,
+        },
+        token
+      );
+      window.location.href = res.data.checkoutUrl;
     } catch (err) {
-      toast.error("Stripe checkout failed");
+      toast.error("Square checkout failed");
       console.error(err);
     }
   };
@@ -86,10 +94,10 @@ const Cart = () => {
 
           <h3>Total: ${totalPrice.toFixed(2)}</h3>
           <button
-            onClick={handleStripeCheckout}
+            onClick={handleSquareCheckout}
             className="btn btn-outline btn-checkout"
           >
-            Checkout with Stripe
+            Checkout with Square 💳
           </button>
         </>
       )}

@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import ResetPasswordForm from "../../components/ResetPasswordForm/ResetPasswordForm";
 import styles from "./ProfilePage.module.css";
 
@@ -14,6 +15,7 @@ const ProfilePage = () => {
       <p>
         <strong>Role:</strong> {user?.role}
       </p>
+      <Link to="/favorites">❤️ Favorites</Link>
 
       <h2>Change Password</h2>
       <div className={styles.resetForm}>

@@ -34,4 +34,5 @@ const Book = sequelize.define("Book", {
   timestamps: true,
 });
 
+
 export default Book;

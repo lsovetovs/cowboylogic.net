@@ -20,6 +20,7 @@ const BookStore = lazy(() => import("./pages/BookStore/BookStore"));
 const BookDetails = lazy(() => import("./pages/BookDetails/BookDetails"));
 const CLStrategies = lazy(() => import("./pages/CLStrategies/CLStrategies"));
 const CLPublishing = lazy(() => import("./pages/CLPublishing/CLPublishing"));
+const FavoritesPage = lazy(() => import("./pages/FavoritesPage/FavoritesPage"));
 
 // ✅ CLStrategies Pages
 const CLStrategiesHome = lazy(() =>
@@ -158,6 +159,14 @@ const App = () => {
                 <AdminRoute>
                   <EditBook />
                 </AdminRoute>
+              }
+            />
+            <Route
+              path="/favorites"
+              element={
+                <PrivateRoute>
+                  <FavoritesPage />
+                </PrivateRoute>
               }
             />
             <Route

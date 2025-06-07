@@ -14,16 +14,23 @@
 }
 
 .modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* ЦЕНТРУЄ по обом осям */
   background-color: rgba(0, 0, 0, 0.5);
   border: 1px solid var(--color-brown);
   border-radius: var(--radius-md);
   padding: 2rem;
-  width: 90%;
   max-width: 420px;
-  color: var(--color-text-dark);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  width: 100%;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  z-index: 1001;
 }
+
+
 
 .modal h3 {
   margin-top: 0;
@@ -50,8 +57,12 @@
 }
 
 .preview {
+  display: block;
   max-width: 100%;
-  max-height: 200px;
+  max-height: 160px; /* зменшено з 200px */
+  width: auto;
+  height: auto;
+  margin: 0 auto;
   border-radius: var(--radius-sm);
   object-fit: contain;
   border: 1px solid white;

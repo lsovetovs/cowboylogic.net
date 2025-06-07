@@ -3,13 +3,15 @@ import { useSelector } from "react-redux";
 import { ROLES } from "../constants/roles";
 
 const AdminRoute = ({ children }) => {
-  const user = useSelector((state) => state.auth.user);
-  const isLoading = useSelector((state) => state.auth.isLoading);
+  const { user, token, isLoading } = useSelector((state) => state.auth);
 
-  if (isLoading) return null; // або <Loader />
+  if (token && user === null && isLoading) return null;
 
   if (!user) return <Navigate to="/login" replace />;
-  if (![ROLES.ADMIN, ROLES.SUPERADMIN].includes(user.role)) return <Navigate to="/" replace />;
+
+  if (![ROLES.ADMIN, ROLES.SUPERADMIN].includes(user.role)) {
+    return <Navigate to="/" replace />;
+  }
 
   return children;
 };
