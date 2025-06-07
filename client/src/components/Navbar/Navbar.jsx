@@ -124,11 +124,11 @@ const Navbar = () => {
         <div className={styles.navRight}>
           {user && (
             <NavLink to="/profile" className={buildLinkClass}>
-              👤 Profile
+              👤 
             </NavLink>
           )}
           <NavLink to="/favorites" className={buildLinkClass}>
-            ❤️ Favorites
+            ❤️ 
           </NavLink>
 
           <button
@@ -143,21 +143,21 @@ const Navbar = () => {
               className={styles.searchIcon}
             />
           </button>
+
+          {isSearchVisible && (
+            <form className={styles.searchForm} onSubmit={handleSearch}>
+              <input
+                type="text"
+                placeholder="Search..."
+                className={styles.searchInput}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus
+              />
+            </form>
+          )}
         </div>
       </div>
-
-      {isSearchVisible && (
-        <form className={styles.searchForm} onSubmit={handleSearch}>
-          <input
-            type="text"
-            placeholder="Search..."
-            className={styles.searchInput}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            autoFocus
-          />
-        </form>
-      )}
     </div>
   );
 };

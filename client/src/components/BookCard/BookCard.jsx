@@ -5,14 +5,13 @@ import FavoriteButton from "../FavoriteButton/FavoriteButton";
 const BookCard = ({
   book,
   onEdit,
-  onDelete,
+  onDeleteClick,
   onAddToCart,
   isAdmin,
   isLoggedIn,
 }) => {
-  // Обробка зображень: абсолютні залишаються, відносні отримують повний префікс
   const getImageUrl = (url) => {
-    if (!url) return "/fallback-image.png"; // опціонально: шлях до дефолтного зображення
+    if (!url) return "/fallback-image.png";
     if (url.startsWith("http")) return url;
     const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
     return `${baseUrl}${url}`;
@@ -30,7 +29,7 @@ const BookCard = ({
         {isAdmin && (
           <div className={styles.actions}>
             <button onClick={() => onEdit(book.id)}>Edit</button>
-            <button onClick={() => onDelete(book.id)}>Delete</button>
+            <button onClick={() => onDeleteClick(book.id)}>Delete</button>
           </div>
         )}
 
@@ -59,3 +58,4 @@ const BookCard = ({
 };
 
 export default BookCard;
+

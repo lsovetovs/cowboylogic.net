@@ -5,12 +5,17 @@
   flex-wrap: wrap;
 }
 
-.navLinks {
+.navLeft {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: var(--spacing-md);
   flex-wrap: wrap;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .navLink {
@@ -80,48 +85,40 @@
   transition: background 0.2s ease;
 }
 
-/* іконка біла — default */
 .searchIcon {
   filter: invert(1);
   transition: filter 0.2s ease;
 }
 
-/* при hover кнопки — іконка стає чорною */
 .searchButton:hover .searchIcon {
   filter: invert(0);
 }
 
-/* фон кнопки при hover — білий */
 .searchButton:hover {
   background-color: white;
 }
 
+/* ОНОВЛЕНИЙ пошук */
 .searchForm {
-  display: flex;
-  justify-content: center;
-  background: var(--color-grey);
-  padding: var(--spacing-sm);
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--radius-sm);
-  margin-top: var(--spacing-sm);
-  max-width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
 }
 
 .searchInput {
-  width: 100%;
+  max-width: 100%;
   padding: var(--spacing-xs);
-  border: 1px solid white;
+  border: 1px solid #ccc;
   font-size: 1rem;
-  background-color: var(--color-light-grey);
-  color: white;
-}
-.navLeft {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  flex-wrap: wrap;
-}
-
-.navRight {
-  display: flex;
-  align-items: center;
+  border-radius: var(--radius-sm);
+  color: black;
+  background-color: white;
 }
